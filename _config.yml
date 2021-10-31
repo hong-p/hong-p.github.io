@@ -21,9 +21,9 @@ title_separator          : ""
 subtitle                 : # site tagline that appears below site title in masthead
 name                     : "hong-p"
 description              : "hong-p tech blog"
-url                      : "https://iyhong.github.io"
+url                      : "https://hong-p.github.io"
 baseurl                  : # the subpath of your site, e.g. "/blog"
-repository               : "iyhong/iyhong.github.io"
+repository               : "hong-p/hong-p.github.io"
 teaser                   : # path of fallback teaser image, e.g. "/assets/images/500x300.png"
 logo                     : # path of logo image to display in the masthead, e.g. "/assets/images/88x88.png"
 masthead_title           : # overrides the website title displayed in the masthead, use " " for no title
@@ -32,7 +32,7 @@ words_per_minute         : 200
 comments:
   provider               : "disqus" # false (default), "disqus", "discourse", "facebook", "staticman", "staticman_v2", "utterances", "custom"
   disqus:
-    shortname            : "iyhong-github-io" # https://help.disqus.com/customer/portal/articles/466208-what-s-a-shortname-
+    shortname            : "hong-p-github-io" # https://help.disqus.com/customer/portal/articles/466208-what-s-a-shortname-
   discourse:
     server               : # https://meta.discourse.org/t/embedding-discourse-comments-via-javascript/31963 , e.g.: meta.discourse.org
   facebook:
@@ -118,7 +118,7 @@ author:
       url: mailto:iyhong0721@gmail.com
     - label: "Website"
       icon: "fas fa-fw fa-link"
-      url: "https://iyhong.github.io"
+      url: "https://hong-p.github.io"
     - label: "Twitter"
       icon: "fab fa-fw fa-twitter-square"
       # url: "https://twitter.com/"
@@ -127,7 +127,7 @@ author:
       # url: "https://facebook.com/"
     - label: "GitHub"
       icon: "fab fa-fw fa-github"
-      url: "https://github.com/iyhong"
+      url: "https://github.com/hong-p"
     - label: "Instagram"
       icon: "fab fa-fw fa-instagram"
       # url: "https://instagram.com/"
