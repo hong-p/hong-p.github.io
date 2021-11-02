@@ -39,7 +39,6 @@ last_modified_at: 2021-11-02
 ![code](https://hong-p.github.io/assets/images/async-defer-1.png "브라우저가 html 파일 해석하는 순서") 
 
 HTML을 parsing(해석) 하다가 작업을 멈추고 js파일을 다운받고 실행하고 이를 완료하면 다시 HTML을 parsing(해석) 하고 사용자에게 보여준다.
-
 만약 js파일이 엄청 크고 무겁다면 사용자에게는 한동안 하얀 화면만 보여주다가 한참 뒤에 데이터를 볼수 있게 된다.
 
 
@@ -70,7 +69,6 @@ HTML 해석을 먼저 완료하고 마지막에 js파일을 다운로드 받고 
 ## head + async
 
 그렇다면 async 속성은 뭘까?
-
 haed 태그안에 script 태그를 넣으면서 async 속성을 넣어 비동기로 js파일의 다운로드를 진행하는것이다.
 ```html
 <!DOCTYPE html>
@@ -91,9 +89,7 @@ haed 태그안에 script 태그를 넣으면서 async 속성을 넣어 비동기
 ![code](https://hong-p.github.io/assets/images/async-defer-3.png "브라우저가 html 파일 해석하는 순서")
 
 위 이미지와 같이 HTML을 parsing 하다가 script 태그를 만나면 fetching(다운로드) 한다.
-
 그러다가 fetching 이 끝나면 HTML parsing을 멈추고 js파일을 실행한다.
-
 실행이 끝나면 나머지 HTML파일을 parsing해 사용자에게 보여준다.
 
 ## head + defer
@@ -123,9 +119,7 @@ HTML을 parsing 하다가 script 태그를 만나면 fetching(다운로드)를 �
 ​
 # use strict
 use strict 이란 ECMAScript 5 부터 추가된 것이다.
-
- js(javascript) 소스에 명시 해주면 원래 유연하게 사용할 수 있었던 javascript를 좀더 엄격하게 하겠다는 의미이다.
-
+js(javascript) 소스에 명시 해주면 원래 유연하게 사용할 수 있었던 javascript를 좀더 엄격하게 하겠다는 의미이다.
 예를들면 아래와 같은 js 파일을 실행하면 아무런 오류도 보이지 않는데
 
 ```javascript
@@ -148,7 +142,6 @@ a=2;
 ![code](https://hong-p.github.io/assets/images/usestrict-2.png "결과")
 
 위 에러는 선언되지 않은 변수가 있다는 에러이므로
-
 let a; 를 선언해 주면 에러는 사라진다.
 
 ```javascript
