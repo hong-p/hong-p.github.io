@@ -89,7 +89,6 @@ var score = 100; // 점수를 의미한다는 의도가 명확하다.
 ```javascript
 // 경과 시간. 단위는 날짜다
 var d;                 // NG
-
 var elapsedTimeInDays; // OK
 ```
 
