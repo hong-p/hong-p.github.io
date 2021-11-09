@@ -1,5 +1,5 @@
 ---
-title: "[javascript] Modern Javascript Deep Dive ch04"
+title: "[javascript] 모던 자바스크립트 Deep Dive ch04 변수"
 excerpt: "모던 자바스크립트 딥다이브 ch04 변수"
 categories:
  - Javascript
@@ -19,8 +19,8 @@ last_modified_at: 2021-11-09
 ```javascript
 var result = 10 + 20;
 ```
-위 코드는 10과 20을 메모리공간에서 가져와 + 연산을 하고 30의 값을 다시 메모리에 넣는데, 
-result라는 변수에 30이라는 값이 넣은곳의 주소를 카리키고 있다.
+위 코드는 10과 20을 메모리공간에서 가져와 + 연산을 하고 30의 값을 다시 메모리에 넣는데,  
+result라는 변수에 30이라는 값이 넣은곳의 주소를 카리키고 있다.  
 변수명을 **식별자**라고 부른다. 위 코드에서 **result**가 **변수명**이자 **식별자**이다. 
   
 ## 변수 선언
