@@ -56,10 +56,10 @@ var sum = 10 + 20;
 불리언 리터럴 | true, false |
 null 리터럴 | null |
 undefined 리터럴 | undefined |
-객체 리터럴 | { name:'inyong', address:'Seoul' }
-배열 리터럴 | [1,2,3]
-함수 리터럴 | function(){}
-정규 표현식 리터럴 | /[A-Z]+/g
+객체 리터럴 | { name:'inyong', address:'Seoul' } |
+배열 리터럴 | [1,2,3] |
+함수 리터럴 | function(){} |
+정규 표현식 리터럴 | /[A-Z]+/g |
 
 ### 표현식
 표현식(`expression`)은 값으로 평가될수 있는 문(`statement`)이다.  
@@ -197,5 +197,5 @@ console.log(foo); // 100
 완료값은 표현식의 평가 결과가 아니다. 따라서 다른 값과 같이 변수에 할당할 수 없고 참조도 할수 없다.  
 ![스크린샷 2021-11-09 오후 11 44 10](https://user-images.githubusercontent.com/80154058/140945713-d83080fc-36fc-4cf4-b013-65463e48423c.png)
   
-크롬 개발자 도구에서 표현식인 문을 실행하면 언제나 평가된 값을 반환한다.
+크롬 개발자 도구에서 표현식인 문을 실행하면 언제나 평가된 값을 반환한다.  
 ![스크린샷 2021-11-09 오후 11 47 37](https://user-images.githubusercontent.com/80154058/140945928-fcddc3c7-9140-465a-ab26-776dd32667c0.png)
