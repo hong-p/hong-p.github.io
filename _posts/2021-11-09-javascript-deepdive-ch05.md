@@ -62,6 +62,7 @@ undefined 리터럴 | undefined |
 함수 리터럴 | function(){} | 
 정규 표현식 리터럴 | /[A-Z]+/g | 
 <br/>
+
 ### 표현식
 표현식(`expression`)은 값으로 평가될수 있는 문(`statement`)이다.  
 즉, 표현식이 평가되면 새로운 값을 생성하거나 기존 값을 참조한다.  
