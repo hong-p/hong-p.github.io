@@ -45,7 +45,8 @@ var sum = 10 + 20;
 3
 ```
 자바스크립트 엔진은 코드가 실행되는 런타임`runtime`시점에 리터럴을 평가해 값을 생성한다.  
-리터럴 | 예시 | 비고
+<img width="434" alt="스크린샷 2021-11-09 오후 11 57 43" src="https://user-images.githubusercontent.com/80154058/140948324-0a7a22f5-b500-4935-a9d0-3c048d6eeb9e.png">
+<!-- 리터럴 | 예시 | 비고
 ---|:---:|---
 정수 리터럴 | 100 | 
 부동소수점 리터럴 | 10.5 | 
@@ -59,7 +60,7 @@ undefined 리터럴 | undefined |
 객체 리터럴 | { name:'inyong', address:'Seoul' } | 
 배열 리터럴 | [1,2,3] | 
 함수 리터럴 | function(){} | 
-정규 표현식 리터럴 | /[A-Z]+/g | 
+정규 표현식 리터럴 | /[A-Z]+/g |  -->
 
 ### 표현식
 표현식(`expression`)은 값으로 평가될수 있는 문(`statement`)이다.  
