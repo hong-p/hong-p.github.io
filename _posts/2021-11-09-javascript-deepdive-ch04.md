@@ -110,7 +110,22 @@ var $elem = document.getElementById('myId'); // DOM 노드
 var observable$ = fromEvent(document, 'click'); // RxJS 옵저버블
 ```
   
-  
+## var vs let
+### var
+var 키워드로 선언된 변수는 선언 단계와 초기화 단계가 한번에 이루어진다.  
+즉, 스코프에 변수를 등록(선언)하고 메모리에 변수를 위한 공간을 확보한 후, undefined로 초기화(초기화)한다.  
+따라서 스코프에 변수가 존재하기 때문에 변수 선언문 이전에 변수에 접근하여도 에러가 발생하지 않고 undefined를 반환한다.  
+이러한 현상을 호이스팅 이라고 한다.  
+<br/>
+
+### let
+let 키워드로 선언된 변수는 선언 단계와 초기화 단계가 분리되어 진행된다.  
+즉, 스코프에 변수를 등록(선언) 하지만 초기화 단계는 변수 선언문에 도달했을 때 이루어 진다.  
+이 때문에 초기화 이전에 변수에 접근하려고 하면 참조에러(ReferenceError)가 발생한다.  
+스코프의 시작 지점부터 초기화 시작 지점까지의 구간을 **일시적 사각지대(TDZ Temporal Dead Zone)** 라고 한다. 
+<br/>
+![스크린샷 2021-11-10 오후 10 36 33](https://user-images.githubusercontent.com/80154058/141122925-67b95974-2b8b-48e8-b289-9f6075ce3448.png)
+
 ---
 키워드
 > - break 
