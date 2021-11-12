@@ -13,7 +13,7 @@ last_modified_at: 2021-11-10
 # 제어문
 제어문(`control flow statement`)은 조건에 따라 코드 블록을 실행(조건문)하거나 반복실행(반복문)할 때 사용한다. 일반적인 코드는 위에서 아래로 순차적으로 실행하지만, 제어문을 사용하면 코드의 실행 흐름을 인위적으로 제어할 수 있다.
 
-## 블록문
+## 1.블록문
 블록문(`block statement`)은 0개 이상의 문을 중괄호로 묶은 것으로, 코드 블록 또는 블록이라고 부르기도 한다. 블록문은 하나의 실행 단위로 취급하며, 단독으로 사용하기도 하나 일반적으로 제어문이나 함수를 정의할 때 사용 한다.
 
 **문의 끝에는 세미콜론을 붙이는 것이 일반적이다.** 하지만 블록문은 언제나 문의 종료를 의미하는 자체 종결성을 갖기 때문에 **블록문의 끝에는 세미콜론을 붙이지 않는다.**
@@ -37,10 +37,10 @@ function sum(a, b) {
 ```
 <br>
 
-## 조건문
+## 2.조건문
 조건문(`conditioonal statement`)은 주어진 조건식(`condition expression`)의 평가결과에 따라 코드블록(블록문의 실행을 결정한다. 조건식은 불리언 값으로 평가될수 있는 표현식이다.
 
-### if...else문
+### 2.1.if...else문
 ```javascript
 var num = 2;
 var kind;
@@ -73,7 +73,7 @@ console.log(kind); // 양수
 
 <br>
 
-### switch문
+### 2.2.switch문
 `switch`문은 주어진 표현식을 평가하여 그 값과 일치하는 표현식을 갖는 `case`문으로 실행 흐름을 옮긴다.
 `switch`문의 표현식과 일치하는 `case`문이 없다면 실행 순서는 `default`문으로 이동한다.
 ```javascript
@@ -153,10 +153,10 @@ console.log(days); // 29
 
 <br>
 
-## 반복문
+## 3.반복문
 반복문(`loop statement`)은 조건식의 평가 결과가 참인 경우 코드 블록을 실행한다. 그 후 조건식을 다시 평가하여 여전히 참인 경우 코드 블록을 다시 실행한다. 거짓일 때까지 반복한다.
 
-### for문
+### 3.1.for문
 ```javascript
 for(변수 선언문 또는 할당문; 조건식; 증감식){
     조건식이 참인 경우 반복 실행될 문;
@@ -169,7 +169,7 @@ for (var i = 0; i < 2; i++) {
 
 <br>
 
-### while문
+### 3.2.while문
 `while`문은 주어진 조건식의 평가 결과가 참이면 코드 블록을 계속 해서 반복 실행한다. `for`문은 반복 횟수가 명확할 때 주로 사용하고 `while`문은 반복횟수가 불명확할 때 주로 사용한다.
 
 ```javascript
@@ -193,7 +193,7 @@ while (true) {
 } // 0 1 2
 ```
 
-### do...while문
+### 3.3.do...while문
 `do...while`문은 코드 블록을 먼저 실행하고 조건식을 평가한다. 코드 블록은 무조건 한 번 이상 실행된다.
 ```javascript
 var count = 0;
@@ -207,7 +207,7 @@ do {
 
 <br>
 
-## break문
+## 4.break문
 `switch`문과 `while`문에서 보았듯이 `break`문을 사용하면 코드 블록을 탈출 한다. 정확히 말하자면 코드 블록을 탈출하는 것이 아니라 레이블 문, 반복문 또는 `switch`문의 코드 블록을 탈출한다.
 ```javascript
 if (true) {
@@ -244,7 +244,7 @@ console.log('Done!');
 ```
 레이블 문의 사용은 `for`문을 탈출할때 많이 사용되지만 그 밖의 경우에는 일반적으로 권장하지 않는다. 레이블 문을 사용하면 프로그램의 흐름이 복잡해져 가독성이 나빠지고 오류를 발생시킬 가능성이 높아지기 때문이다.
 
-## cpontinue문
+## 5.continue문
 `continue`문은 반복문의 코드 블록 실행을 현 지점에서 중단하고 반복문의 증감식으로 실행 흐름을 이동시킨다. `break`문 처럼 반복문을 탈출하지는 않는다.
 ```javascript
 var string = 'Hello World.';
@@ -264,6 +264,7 @@ console.log(count); // 3
 const regexp = new RegExp(search, 'g');
 console.log(string.match(regexp).length); // 3
 ```
+
 ```javascript
 // continue 문을 사용하지 않으면 if 문 내에 코드를 작성해야 한다.
 for (var i = 0; i < string.length; i++) {
