@@ -40,7 +40,7 @@ function sum(a, b) {
 ## 2.조건문
 조건문(`conditioonal statement`)은 주어진 조건식(`condition expression`)의 평가결과에 따라 코드블록(블록문의 실행을 결정한다. 조건식은 불리언 값으로 평가될수 있는 표현식이다.
 
-### 2.1.if...else문
+### 2.1 if...else문
 ```javascript
 var num = 2;
 var kind;
@@ -73,7 +73,7 @@ console.log(kind); // 양수
 
 <br>
 
-### 2.2.switch문
+### 2.2 switch문
 `switch`문은 주어진 표현식을 평가하여 그 값과 일치하는 표현식을 갖는 `case`문으로 실행 흐름을 옮긴다.
 `switch`문의 표현식과 일치하는 `case`문이 없다면 실행 순서는 `default`문으로 이동한다.
 ```javascript
@@ -156,7 +156,7 @@ console.log(days); // 29
 ## 3.반복문
 반복문(`loop statement`)은 조건식의 평가 결과가 참인 경우 코드 블록을 실행한다. 그 후 조건식을 다시 평가하여 여전히 참인 경우 코드 블록을 다시 실행한다. 거짓일 때까지 반복한다.
 
-### 3.1.for문
+### 3.1 for문
 ```javascript
 for(변수 선언문 또는 할당문; 조건식; 증감식){
     조건식이 참인 경우 반복 실행될 문;
@@ -169,7 +169,7 @@ for (var i = 0; i < 2; i++) {
 
 <br>
 
-### 3.2.while문
+### 3.2 while문
 `while`문은 주어진 조건식의 평가 결과가 참이면 코드 블록을 계속 해서 반복 실행한다. `for`문은 반복 횟수가 명확할 때 주로 사용하고 `while`문은 반복횟수가 불명확할 때 주로 사용한다.
 
 ```javascript
@@ -193,7 +193,7 @@ while (true) {
 } // 0 1 2
 ```
 
-### 3.3.do...while문
+### 3.3 do...while문
 `do...while`문은 코드 블록을 먼저 실행하고 조건식을 평가한다. 코드 블록은 무조건 한 번 이상 실행된다.
 ```javascript
 var count = 0;
