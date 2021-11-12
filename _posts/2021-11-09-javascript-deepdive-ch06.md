@@ -71,8 +71,8 @@ console.log(1 * 'String'); // NaN
 ## 문자열 타입
 문자열 타입`string`은 텍스트 데이터를 나타내는데 사용한다.  
 문자열은 0개 이상의 16비트 유니코드 문자(UTF-16)의 집합으로 전 세계 대부분의 문자를 표현할수 있다.  
-문자열은 작은따옴표(`''`), 큰따옴표(`""`), 백틱(` `` `)으로 텍스트를 감싼다.  
-자바스크립트에서는 일반적으로 작은따옴표(`''`)를 사용한다.  
+문자열은 작은따옴표(`' '`), 큰따옴표(`" "`), 백틱(`` ` ` ``)으로 텍스트를 감싼다.  
+자바스크립트에서는 일반적으로 작은따옴표(`' '`)를 사용한다.  
 >참고: [에어비엔비 JavaScript Style Guide](https://github.com/airbnb/javascript#strings)
 
 ```javascript
@@ -95,7 +95,7 @@ string = "큰따옴표로 감싼 문자열 내의 '작은따옴표'는 문자열
 ### 템플릿 리터럴
 ES6부터 도입된 표기법 `template literal`  
 템플릿 리터럴은 멀티라인 문자열`multi-line string`, 표현식 삽입`expression interpolation`, 태그드 템플릿`tagged template` 등 편리한 문자열 처리기능을 제공한다.  
-백틱(` `` `)을 사용해 표현한다.
+백틱(`` ` ` ``)을 사용해 표현한다.
 ```javascript
 var template = `Template literal`;
 console.log(template); // Template literal
