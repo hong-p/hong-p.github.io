@@ -126,6 +126,18 @@ let 키워드로 선언된 변수는 선언 단계와 초기화 단계가 분리
 <br/>
 ![스크린샷 2021-11-10 오후 10 36 33](https://user-images.githubusercontent.com/80154058/141122925-67b95974-2b8b-48e8-b289-9f6075ce3448.png)
 
+
+Hoisting let and const variables:
+Let’s first take a look at some examples:
+```javascript
+console.log(a);
+let a = 3; // ReferenceError: a is not defined
+```
+>So are let and const variables not hoisted?
+>The answer is a bit more complicated than that. All declarations (function, var, let, const and class) are hoisted in JavaScript, while the var declarations are initialized with undefined, but let and const declarations remain uninitialized.
+>They will only get initialized when their lexical binding (assignment) is evaluated during runtime by the JavaScript engine. This means you can’t access the variable before the engine evaluates its value at the place it was declared in the source code. This is what we call “Temporal Dead Zone”, A time span between variable creation and its initialization where they can’t be accessed.
+>If the JavaScript engine still can’t find the value of let or const variables at the line where they were declared, it will assign them the value of undefined or return an error (in case of const).
+
 ---
 키워드
 > - break 
