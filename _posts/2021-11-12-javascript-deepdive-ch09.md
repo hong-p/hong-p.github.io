@@ -32,7 +32,7 @@ console.log(typeof x, x); // number 10
 
 <br/>
 
-암묵적 타입변환(implicit coercion)은 타입 `강제 변환(type coercion)`이라고도 한다.
+암묵적 타입변환(implicit coercion)은 `타입 강제 변환(type coercion)`이라고도 한다.
 ```javascript
 var x = 10;
 
@@ -335,6 +335,7 @@ false * 1;   // -> 0
 불리언 타입이 아닌 값을 불리언 타입으로 변환
  - `Boolean`생성자 함수를 `new`연산자 없이 호출하는 방법
  - `!`부정 논리 연산자를 두 번 사용하는 방법
+
 ```javascript
 // 1. Boolean 생성자 함수를 new 연산자 없이 호출하는 방법
 // 문자열 타입 => 불리언 타입
@@ -378,6 +379,7 @@ Boolean([]);        // -> true
 ## 4.단축 평가
 ### 4.1 논리 연산자를 사용한 단축 평가
 논리합`||` 또는 논리곱`&&`연산자 표현식의 평가 결과는 불리언 값이 아닐 수도 있다.
+
 ```javascript
 1===1 && 'a'==='a' // true
 ```
@@ -396,9 +398,11 @@ Boolean([]);        // -> true
 
 논리합`||`연산자는 두 개의 피연산자 중 하나만 `true`로 평가되어도 `true`를 반환한다.  
 좌항에서 우항으로 평가를 진행한다.
+
 ```javascript
 'Cat' || 'Dog' // -> "Cat"
 ```
+
 첫 번째 피연산자 `'Cat'`은 `Truthy`값이므로 `true`로 평가되고, 이 시점에서는 두 번째 피연산자까지 평가 할 필요없이 표현식이 평가되기 때문에 `'Cat'`문자열을 그대로 반환한다.
 
 단축 평가 표현식 | 평가 결과
@@ -423,6 +427,7 @@ false && 'Dog'  // -> false
 <br>
 
 어떤 조건이 `Truthy`값인 경우 논리곱`&&`연산자 표현식으로 `if`문을 대체할 수 있다.
+
 ```javascript
 var done = true;
 var message = '';
@@ -438,6 +443,7 @@ console.log(message); // 완료
 <br>
 
 조건이 `Falsy`값 인경우 논리합`||`연산자 표현식으로 `if`문을 대체할 수 있다.
+
 ```javascript
 var done = false;
 var message = '';
@@ -454,6 +460,7 @@ console.log(message); // 미완료
 <br>
 
 삼항 조건 연산자는 `if...else`문을 대체 할 수 있다.
+
 ```javascript
 var done = true;
 var message = '';
@@ -472,6 +479,7 @@ console.log(message); // 완료
 
 객체를 가리키기를 기대하는 변수가 `null`또는 `undefined`가 아닌지 확인하고 프로퍼티를 참조할 때  
 단축 평가를 사용하면 에러없이 사용할 수 있다.
+
 ```javascript
 // 그냥 참조
 var elem = null;
@@ -489,6 +497,7 @@ var value = elem && elem.value; // -> null
 
 함수 매개변수에 기본값을 설정할 때  
 함수를 호출할 때 인수를 전달하지 않으면 매개변수에는 `undefined`가 할당되는데, 단축 평가를 사용하면 이를 방지할 수 있다.
+
 ```javascript
 // 단축 평가를 사용한 매개변수의 기본값 설정
 function getStringLength(str) {
@@ -513,6 +522,7 @@ getStringLength('hi'); // -> 2
 
 ### 4.2 옵셔널 체이닝 연산자
 ES11(ECMAScript2020)에 도입된 `옵셔널 체이닝(optional chaining)` 연산자 `?.`는 좌항의 피연산자가 `null`또는 `undefined`인 경우 `undefined`를 반환하고, 그렇지 않으면 우항의 프로퍼티 참조를 이어간다.
+
 ```javascript
 var elem = null;
 
@@ -524,6 +534,7 @@ console.log(value); // undefined
 
 옵셔널 체이닝 연산자가 도입되기 전에는 논리곱`&&`을 사용했었다.  
 하지만  논리곱`&&`연산자는 옵셔널 체이닝 연산자와는 다르게 `Falsy`(`false`, `undefined`, `0`, `NaN`, `' '`)값이면 좌항의 피연산자를 반환 해버리기 때문에 조금 문제가 있다.
+
 ```javascript
 var elem = null;
 
@@ -543,6 +554,7 @@ console.log(length); // ''
 ```
 
 옵셔널 체이닝 연산자`?.`는 좌항의 피연산자가 `false`로 평가되는 `Falsy`(`false`, `undefined`, `0`, `NaN`, `' '`)값이라도 `null` 또는 `undefined`가 아니면 우항의 프로퍼티 참조를 이어간다.
+
 ```javascript
 var str = '';
 
@@ -575,4 +587,5 @@ console.log(foo); // "default string"
 var foo = '' ?? 'default string';
 console.log(foo); // ""
 ```
+
 옵셔널 체이닝과 마찬가지로 null 병합 연산자 `??`는 좌항의 피연산자가 `false`로 평가되는 `Falsy`(`false`, `undefined`, `0`, `NaN`, `' '`)값이라도 `null` 또는 `undefined`가 아니면 우항의 프로퍼티 참조를 이어간다.
