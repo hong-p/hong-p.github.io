@@ -1,6 +1,6 @@
 ---
-title: "[javascript] 모던 자바스크립트 Deep Dive ch06 데이터 타입"
-excerpt: "모던 자바스크립트 딥다이브 ch06 데이터 타입"
+title: "모던 자바스크립트 딥 다이브 ch06 데이터 타입"
+excerpt: "[javascript] 모던 자바스크립트 Deep Dive ch06 데이터 타입"
 categories:
  - Javascript
 tags:
