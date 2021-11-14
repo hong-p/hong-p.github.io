@@ -1,6 +1,6 @@
 ---
-title: "[javascript] 모던 자바스크립트 Deep Dive ch12 함수"
-excerpt: "모던 자바스크립트 딥다이브 ch12 함수"
+title: "모던 자바스크립트 딥 다이브 ch12 함수"
+excerpt: "[javascript] 모던 자바스크립트 Deep Dive ch12 함수"
 categories:
  - Javascript
 tags:
@@ -28,6 +28,7 @@ bar(); // ReferenceError: bar is not defined
 bar = (function bar(){ console.log('bar'); });
 bar(); // bar
 ```
+<<<<<<< HEAD
 
 ```javascript
 // 그룹 연산자로 함수를 묶은 경우
@@ -37,3 +38,5 @@ bar(); // bar
 (false||function(){console.log('a')})() // a
 false||function(){console.log('a')}() // a
 ```
+=======
+>>>>>>> a6aac7de7f8df506f3c913b96176358cf3efbdb6

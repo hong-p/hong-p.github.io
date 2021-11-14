@@ -1,6 +1,6 @@
 ---
-title: "[javascript] 모던 자바스크립트 Deep Dive ch09 타입 변환과 단축 평가"
-excerpt: "모던 자바스크립트 딥다이브 ch09 타입 변환과 단축 평가"
+title: "모던 자바스크립트 딥 다이브 ch09 타입 변환과 단축 평가"
+excerpt: "[javascript] 모던 자바스크립트 Deep Dive ch09 타입 변환과 단축 평가"
 categories:
  - Javascript
 tags:
