@@ -1,6 +1,6 @@
 ---
-title: "[javascript] 모던 자바스크립트 Deep Dive ch12 함수"
-excerpt: "모던 자바스크립트 딥다이브 ch12 함수"
+title: "모던 자바스크립트 딥 다이브 ch12 함수"
+excerpt: "[javascript] 모던 자바스크립트 Deep Dive ch12 함수"
 categories:
  - Javascript
 tags:
