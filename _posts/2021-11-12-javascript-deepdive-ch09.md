@@ -411,10 +411,10 @@ Boolean([]);        // -> true
 
 단축 평가 표현식 | 평가 결과
 :---:|:---:
- <code>true `||` anything</code> | true
- <code>false `||` anything </code> | anything
- <code>true && anything</code> | anything
- <code>false && anything</code> | true
+ `true `<code>||</code> anything` | true
+ <pre>false || anything</pre> | anything
+ `true && anything` | anything
+ `false && anything` | true
  
  단축 평가 표현식 | 평가 결과
 :---:|:---:
