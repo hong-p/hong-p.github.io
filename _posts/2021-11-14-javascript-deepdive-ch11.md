@@ -1,6 +1,6 @@
 ---
-title: "[javascript] 모던 자바스크립트 Deep Dive ch11 원시 값과 객체의 비교"
-excerpt: "모던 자바스크립트 딥다이브 ch11 원시 값과 객체의 비교"
+title: "모던 자바스크립트 딥 다이브 ch11 원시 값과 객체의 비교"
+excerpt: "[javascript] 모던 자바스크립트 Deep Dive ch11 원시 값과 객체의 비교"
 categories:
  - Javascript
 tags:
