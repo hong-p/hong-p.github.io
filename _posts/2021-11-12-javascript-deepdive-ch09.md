@@ -387,8 +387,9 @@ Boolean([]);        // -> true
 ```javascript
 'Cat' && 'Dog' // -> "Dog"
 ```
-논리곱`&&`연산자는 두 개의 피연산자가 모두 `true`로 평가될 대 `true`를 반환한다.  
+논리곱`&&`연산자는 두 개의 피연산자가 모두 `true`로 평가될 때 `true`를 반환한다.  
 좌항에서 우항으로 평가가 진행된다. 
+피 연산자가 불리언 타입이 아닐경우 값이 평가된다.
 
 <br>
 
@@ -406,12 +407,14 @@ Boolean([]);        // -> true
 
 첫 번째 피연산자 `'Cat'`은 `Truthy`값이므로 `true`로 평가되고, 이 시점에서는 두 번째 피연산자까지 평가 할 필요없이 표현식이 평가되기 때문에 `'Cat'`문자열을 그대로 반환한다.
 
+<br/>
+
 단축 평가 표현식 | 평가 결과
 :---:|:---:
-` true || anything ` | true
-` false || anything ` | anything
-` true && anything ` | anything
-` false && anything ` | true
+ ` true \|\| anything ` | true
+ ` false \|\| anything ` | anything
+ ` true && anything ` | anything
+ ` false && anything ` | true
 
 ```javascript
 // 논리합(||) 연산자
