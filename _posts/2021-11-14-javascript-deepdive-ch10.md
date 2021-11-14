@@ -17,7 +17,7 @@ last_modified_at: 2021-11-14
 <br>
 
 원시 타입은 단 하나의 값만 나타내지만,  
-객체 타입은(`object type / reference type`)은 다양한 타입의 값(원시 값 또는 다른 객체)을 하나의 단위로 구성한 복합적인 자료구조`data structure`이다.  
+객체 타입은(`object type` / `reference type`)은 다양한 타입의 값(원시 값 또는 다른 객체)을 하나의 단위로 구성한 복합적인 자료구조`data structure`이다.  
 
 <br>
 
@@ -32,7 +32,7 @@ last_modified_at: 2021-11-14
 
 참고로, 프로퍼티 값이 함수일 경우, 일반 함수와 구분하기 위해 **메서드`method`**라고 부른다.
 
-> -프로퍼티:  객체의 상태를 나타내는 값(data)
+> -프로퍼티:  객체의 상태를 나타내는 값(data)  
 > -메서드: 프로퍼티(상태 데이터)를 참조하고 조작할 수 있는 동작(behavior)
 
 ## 2.객체 리터럴에 의한 객체 생성
@@ -386,6 +386,7 @@ obj.sayHi(); // Hi! Lee
 <br>
 
 프로퍼티의 일반 함수와 메서드(메서드 축약 표현) 차이점
+
 일반 함수 | 메서드 
 :--:|:--:
 인스턴스 생성 O | 인스턴스 생성 X
@@ -394,3 +395,27 @@ obj.sayHi(); // Hi! Lee
 prototype 프로퍼티 O | prototype 프로퍼티 X
 `[[HomeObject]]` X | `[[HomeObject]]` O
 `super` 사용 X | `super` 사용 O
+
+```javascript
+const obj = {
+  x: 1,
+  // foo는 메서드이다.
+  foo() { return this.x; },
+  // bar에 바인딩된 함수는 메서드가 아닌 일반 함수이다.
+  bar: function() { return this.x; }
+};
+
+console.log(obj.foo()); // 1
+console.log(obj.bar()); // 1
+
+
+new obj.foo(); // -> TypeError: obj.foo is not a constructor
+new obj.bar(); // -> bar {}
+
+
+// obj.foo는 constructor가 아닌 ES6 메서드이므로 prototype 프로퍼티가 없다.
+obj.foo.hasOwnProperty('prototype'); // -> false
+
+// obj.bar는 constructor인 일반 함수이므로 prototype 프로퍼티가 있다.
+obj.bar.hasOwnProperty('prototype'); // -> true
+```
