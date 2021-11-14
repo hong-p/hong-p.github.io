@@ -237,7 +237,7 @@ person.'1';   // -> SyntaxError: Unexpected string
 person[1];    // -> 10 : person[1] -> person['1']
 person['1'];  // -> 10
 ```
-위 예제에서 `person.last-name`의 실행결과가 브라우저와 Node.js 환경이 다른 이유는??
+위 예제에서 `person.last-name`의 실행결과가 브라우저와 Node.js 환경이 다른 이유는??  
 `person.last-name`을 평가할 때 자바스크립트 엔진은 `person.last`를 먼저 평가하는데,  
 브라우저 환경에는 `window`객체에 `name`의 프로퍼티가 암묵적으로 전재하고 기본값은 빈 문자열이다.  
 이에 반해 Node.js 환경에서는 전역변수 name이 존재하지 않기 대문에 `ReferenceError`가 발생한다.  
