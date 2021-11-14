@@ -28,7 +28,7 @@ bar(); // ReferenceError: bar is not defined
 bar = (function bar(){ console.log('bar'); });
 bar(); // bar
 ```
-<<<<<<< HEAD
+
 
 ```javascript
 // 그룹 연산자로 함수를 묶은 경우
@@ -38,5 +38,4 @@ bar(); // bar
 (false||function(){console.log('a')})() // a
 false||function(){console.log('a')}() // a
 ```
-=======
->>>>>>> a6aac7de7f8df506f3c913b96176358cf3efbdb6
+
