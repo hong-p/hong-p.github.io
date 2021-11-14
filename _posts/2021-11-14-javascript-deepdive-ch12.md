@@ -28,3 +28,12 @@ bar(); // ReferenceError: bar is not defined
 bar = (function bar(){ console.log('bar'); });
 bar(); // bar
 ```
+
+```javascript
+// 그룹 연산자로 함수를 묶은 경우
+(function(){console.log('a')})() // a
+
+// 논리합 연산자로 단축평가를 사용한 경우
+(false||function(){console.log('a')})() // a
+false||function(){console.log('a')}() // a
+```
