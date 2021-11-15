@@ -1,6 +1,6 @@
 ---
-title: "모던 자바스크립트 딥 다이브 ch04 변수"
-excerpt: "[javascript] 모던 자바스크립트 Deep Dive ch04 변수"
+title: "모던 자바스크립트 딥 다이브 4장 변수"
+excerpt: "[javascript] 모던 자바스크립트 Deep Dive 4장 변수"
 categories:
  - Javascript
 tags:
