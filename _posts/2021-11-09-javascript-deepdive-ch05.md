@@ -1,6 +1,6 @@
 ---
-title: "모던 자바스크립트 딥 다이브 ch05 표현식과 문"
-excerpt: "[javascript] 모던 자바스크립트 Deep Dive ch05 표현식과 문"
+title: "모던 자바스크립트 딥 다이브 5장 표현식과 문"
+excerpt: "[javascript] 모던 자바스크립트 Deep Dive 5장 표현식과 문"
 categories:
  - Javascript
 tags:
