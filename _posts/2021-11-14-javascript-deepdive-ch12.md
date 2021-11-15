@@ -102,6 +102,7 @@ console.log(result); // 7
 정의된 함수는 평가되어 함수 객체가 된다.  
 
 *※함수를 정의하는 4가지 방법*
+
 함수 정의 방식 | 예시
 ---|---
 함수 선언문| <code>function add(x,y){<br>return x+y;<br>}</code>
