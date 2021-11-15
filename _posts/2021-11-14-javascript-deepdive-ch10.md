@@ -1,6 +1,6 @@
 ---
-title: "모던 자바스크립트 딥 다이브 ch10 객체 리터럴"
-excerpt: "[javascript] 모던 자바스크립트 Deep Dive ch10 객체 리터럴"
+title: "모던 자바스크립트 딥 다이브 10장 객체 리터럴"
+excerpt: "[javascript] 모던 자바스크립트 Deep Dive 10장 객체 리터럴"
 categories:
  - Javascript
 tags:
