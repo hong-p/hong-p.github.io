@@ -1,6 +1,6 @@
 ---
-title: "모던 자바스크립트 딥 다이브 ch08 제어문"
-excerpt: "[javascript] 모던 자바스크립트 Deep Dive ch08 제어문"
+title: "모던 자바스크립트 딥 다이브 8장 제어문"
+excerpt: "[javascript] 모던 자바스크립트 Deep Dive 8장 제어문"
 categories:
  - Javascript
 tags:
