@@ -282,3 +282,10 @@ console.log(copy);   // {name: "Kim", address: "Seoul"}
 
 `값에 의한 전달`과 `참조에 의한 전달`은 식별자가 기억하는 **메모리 공간에 저장되어 있는 값을 복사해서 전달**한다는 면에서 동일하다.  
 다만, 식별자가 기억하는 메모리 공간, 즉 **변수에 저장되어 있는 값이 원시 값이냐, 참조 값이냐의 차이**로 동작이 다른 것이다.
+
+
+---
+
+## 참조
+
+이미지 출처 : https://velog.io/@niyu/11%EC%9E%A5-%EC%9B%90%EC%8B%9C-%EA%B0%92%EA%B3%BC-%EA%B0%9D%EC%B2%B4%EC%9D%98-%EB%B9%84%EA%B5%90-%EB%AA%A8%EB%8D%98-%EC%9E%90%EB%B0%94%EC%8A%A4%ED%81%AC%EB%A6%BD%ED%8A%B8-Deep-Dive
