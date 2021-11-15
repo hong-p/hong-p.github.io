@@ -1,6 +1,6 @@
 ---
-title: "모던 자바스크립트 딥 다이브 ch07 연산자"
-excerpt: "[javascript] 모던 자바스크립트 Deep Dive ch07 연산자"
+title: "모던 자바스크립트 딥 다이브 7장 연산자"
+excerpt: "[javascript] 모던 자바스크립트 Deep Dive 7장 연산자"
 categories:
  - Javascript
 tags:
