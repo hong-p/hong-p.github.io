@@ -220,7 +220,7 @@ console.log(add(2,5)); // 7
 ### 4.2 함수 표현식(=함수 리터럴)
 자바스크립트의 함수는 일급 객체이다.  
 일급 객체는 값처럼 변수에 할당할 수 있고, 프로퍼티 값이 될수도 있으며, 배열의 요소도 될 수 있다.  
-이러한 함수의 정의 방식을 `함수 표현식 function expressiont`이라고 한다.
+이러한 함수의 정의 방식을 `함수 표현식 function expression`이라고 한다.
 ```javascript
 // 함수 표현식
 var add = function (x, y) {
