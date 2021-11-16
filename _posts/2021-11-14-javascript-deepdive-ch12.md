@@ -483,7 +483,9 @@ console.log(result); // 15
 <br>
 
 반환문의 역할
+
 - 함수의 실행을 중단하고 함수 몸체를 빠져나간다.
+
 ```javascript
 function multiply(x, y) {
   return x * y; // 반환문
@@ -493,7 +495,9 @@ function multiply(x, y) {
 
 console.log(multiply(3, 5)); // 15
 ```
+
 - `return`키워드 뒤에 오는 표현식을 평가해 반환한다.(`return`키워드 뒤에 표현식이 없으면 `undefined`가 반환된다.)
+
 ```javascript
 function foo () {
   return;
@@ -501,7 +505,9 @@ function foo () {
 
 console.log(foo()); // undefined
 ```
+
 - 반환문은 생략할 수 있다.(이때 마지막 문까지 실행 후 암묵적으로 `undefined`를 반환한다.)
+
 ```javascript
 function foo () {
   // 반환문을 생략하면 암묵적으로 undefined가 반환된다.
@@ -509,7 +515,9 @@ function foo () {
 
 console.log(foo()); // undefined
 ```
+
 - `return`키워드와 표현식 사이에 줄바꿈이 잇으면 세미콜론 자동 삽입 기능으로 의도치 않은 결과가 발생할 수 있다.
+
 ```javascript
 function multiply(x, y) {
   // return 키워드와 반환값 사이에 줄바꿈이 있으면
@@ -519,7 +527,9 @@ function multiply(x, y) {
 
 console.log(multiply(3, 5)); // undefined
 ```
+
 - 반환문은 함수 몸체 내부에서만 사용할 수 있다.(전역에서 사용하면 문법 에러 발생)
+
 ```javascript
 <!DOCTYPE html>
 <html>
