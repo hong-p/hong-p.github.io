@@ -534,7 +534,8 @@ console.log(multiply(3, 5)); // undefined
 <br>
 
 ## 6.참조에 의한 전달과 외부 상태의 변경
-'원시 값과 객체의 비교'에서 살펴 봤듯이 원시값은 값에 의한 전달(`pass by value`), 객체는 참조에 의한 전달(`pass by reference`)방식으로 동작한다.  
+
+원시 값과 객체의 비교'에서 살펴 봤듯이 원시값은 값에 의한 전달(`pass by value`), 객체는 참조에 의한 전달(`pass by reference`)방식으로 동작한다.  
 함수의 매개변수도 동일하다.
 ```javascript
 // 매개변수 primitive는 원시값을 전달받고, 매개변수 obj는 객체를 전달받는다.
