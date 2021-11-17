@@ -320,7 +320,7 @@ console.log(add1(1, 2)); // 13
 
 var add2 = (function () {
   var a = 10;
-  return new Function('x', 'y', 'return x + y + a;');
+  return new Function('x', 'y', 'return x + y + a;'); // 클로저 환경이 만들어지지 않아 a(자유변수)를 참조할 수 없다.
 }());
 
 console.log(add2(1, 2)); // ReferenceError: a is not defined
