@@ -441,7 +441,7 @@ console.log(add()); // 0
 
 <br>
 
-3.ES6에 도임된 매개변수 기본값을 사용하기
+3.ES6에 도입된 매개변수 기본값을 사용하기
 
 ```javascript
 function add(a = 0, b = 0, c = 0) {
