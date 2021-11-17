@@ -403,7 +403,7 @@ add(2, 5, 10);
 
 <br>
 
-1. `typeof`로 확인하기
+1.`typeof`로 확인하기
 
 ```javascript
 function add(x, y) {
@@ -423,7 +423,7 @@ console.log(add('a', 'b')); // TypeError: 인수는 모두 숫자 값이어야 �
 
 <br>
 
-2. 단축평가를 활용해 기본값 할당하기
+2.단축평가를 활용해 기본값 할당하기
 
 ```javascript
 function add(a, b, c) {
@@ -441,7 +441,7 @@ console.log(add()); // 0
 
 <br>
 
-3. ES6에 도임된 매개변수 기본값을 사용하기
+3.ES6에 도임된 매개변수 기본값을 사용하기
 
 ```javascript
 function add(a = 0, b = 0, c = 0) {
