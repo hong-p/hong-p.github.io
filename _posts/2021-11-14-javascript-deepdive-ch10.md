@@ -291,7 +291,35 @@ delete person.age;
 delete person.address;
 
 console.log(person); // {name: "Lee"}
+
+
+// 프로퍼티를 지울 수 없게 생성하기
+Object.defineProperty(person, 'age', {value:20, configurable:false}) 
+delete person.age // false
+console.log(person); // {name: "Lee", age: 20}
 ```
+
+전역 객체로 생성하는 경우 특이한 점
+```javascript
+// window 객체에 프로퍼티를 추가하는 경우
+window.a = 10
+console.log(window.a) // 10
+
+delete window.a // true
+console.log(window.a) // undefined
+
+
+// var 키워드로 생성하는 경우
+var a = 10
+console.log(window.a) // 10
+
+delete window.a // false
+console.log(window.a) // 10
+```
+var 키워드로 전역변수를 생성하는 경우  
+위에서 확인한 `Object.defineProperty()` 함수로 `configurable:false`를 준것과 동일하게 프로퍼티를 생성하는 듯!  
+
+<br>
 
 ## 9.ES6에서 추가된 객체 리터럴의 확장 기능
 ES6에서 추가된 객체 리터럴 확장기능
