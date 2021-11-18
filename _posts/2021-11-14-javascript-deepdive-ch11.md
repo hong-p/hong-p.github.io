@@ -94,6 +94,15 @@ console.log(str.toUpperCase()); // HI
 console.log(typeof str); // string
 ```
 
+위 예제에서 `str.toUpperCase()`이 부분을 풀어서 보면 아래와 같이 temp객체를 만들어서  
+`String` 생성자 함수로 임시 객체를 만들고 `String`객체가 가지고 있는 `toUpperCase()`함수를 사용해 그 결과를 리턴해 주는식으로 동작한다.
+```javascript
+const str = 'hello';
+// str.toUpperCase()
+const temp = new String(str).toUpperCase();
+temp.toUpperCase()
+```
+
 
 ### 1.3 값에 의한 전달
 변수`copy`에 원시 값을 갖는 변수`score`를 할당하면 할당받는 변수`copy`에는 할당되는 변수`score`의 원시 값이 복사되어 전달된다.
