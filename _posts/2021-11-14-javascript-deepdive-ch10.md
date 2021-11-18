@@ -450,3 +450,4 @@ obj.foo.hasOwnProperty('prototype'); // -> false
 // obj.bar는 constructor인 일반 함수이므로 prototype 프로퍼티가 있다.
 obj.bar.hasOwnProperty('prototype'); // -> true
 ```
+![이미지](https://user-images.githubusercontent.com/80154058/142414143-6e3548b6-6490-4c88-b621-197bf96a9cd9.png)
