@@ -99,7 +99,7 @@ console.log(typeof str); // string
 ```javascript
 const str = 'hello';
 // str.toUpperCase()
-const temp = new String(str).toUpperCase();
+const temp = new String(str);
 temp.toUpperCase()
 ```
 
