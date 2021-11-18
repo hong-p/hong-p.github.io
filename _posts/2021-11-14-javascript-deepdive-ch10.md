@@ -129,6 +129,7 @@ var foo = {
 };
 
 console.log(foo); // {"": ""}
+console.log(foo['']) // '' 접근할때는 []로만 가능
 ```
 
 <br>
