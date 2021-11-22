@@ -14,7 +14,7 @@ last_modified_at: 2021-11-14
 
 데이터 타입
 
-` ` |원시 타입`primitive type` | 객체 타입`object/reference type`
+` ` |원시 타입(`primitive type`) | 객체 타입(`object/reference type`)
 :---:|:---:|:---:
 값|변경 불가능한 값`immutable value` | 변경 가능한 값`mutable value`
 할당 시|변수에는 실제 값이 저장 | 변수에는 참조 값이 저장
@@ -25,7 +25,7 @@ last_modified_at: 2021-11-14
 원시 타입`primitive type`의 값은 변경 불가능한 값`immutable value`이다. 한번 생성된 원시값은 읽기 전용`read only`값으로서 변경할 수 없다.  
 변경 불가능 하다는 것은 변수가 아니라 값에 대한 진술이다.    
 변수는 언제든지 재할당을 통해 변수 값을 변경할 수 있다.  
-변수 값을 변경하기 위해 원시 값을 재할당하면 새로운 메모리 공간을 확보하고 재할당한 값을 저장한 후, 변수가 참조하던 메모리 공간의 주소를 변경한다. 값의 이러한 특성을 **불변성`immutability`**라고 한다.
+변수 값을 변경하기 위해 원시 값을 재할당하면 새로운 메모리 공간을 확보하고 재할당한 값을 저장한 후, 변수가 참조하던 메모리 공간의 주소를 변경한다. 값의 이러한 특성을 **불변성**`immutability`라고 한다.
 
 ### 1.2 문자열과 불변성
 
@@ -92,6 +92,15 @@ console.log(str.toUpperCase()); // HI
 
 // 래퍼 객체로 프로퍼티에 접근하거나 메서드를 호출한 후, 다시 원시값으로 되돌린다.
 console.log(typeof str); // string
+```
+
+위 예제에서 `str.toUpperCase()`이 부분을 풀어서 보면 아래와 같이 temp객체를 만들어서  
+`String` 생성자 함수로 임시 객체를 만들고 `String`객체가 가지고 있는 `toUpperCase()`함수를 사용해 그 결과를 리턴해 주는식으로 동작한다.
+```javascript
+const str = 'hello';
+// str.toUpperCase()
+const temp = new String(str);
+temp.toUpperCase()
 ```
 
 
@@ -288,4 +297,4 @@ console.log(copy);   // {name: "Kim", address: "Seoul"}
 
 ## 참조
 
-이미지 출처 : https://velog.io/@niyu/11%EC%9E%A5-%EC%9B%90%EC%8B%9C-%EA%B0%92%EA%B3%BC-%EA%B0%9D%EC%B2%B4%EC%9D%98-%EB%B9%84%EA%B5%90-%EB%AA%A8%EB%8D%98-%EC%9E%90%EB%B0%94%EC%8A%A4%ED%81%AC%EB%A6%BD%ED%8A%B8-Deep-Dive
+[이미지 출처](https://velog.io/@niyu/11%EC%9E%A5-%EC%9B%90%EC%8B%9C-%EA%B0%92%EA%B3%BC-%EA%B0%9D%EC%B2%B4%EC%9D%98-%EB%B9%84%EA%B5%90-%EB%AA%A8%EB%8D%98-%EC%9E%90%EB%B0%94%EC%8A%A4%ED%81%AC%EB%A6%BD%ED%8A%B8-Deep-Dive)

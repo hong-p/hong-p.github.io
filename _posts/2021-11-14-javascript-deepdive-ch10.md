@@ -37,7 +37,9 @@ last_modified_at: 2021-11-14
 
 ## 2.객체 리터럴에 의한 객체 생성
 `c++`이나 `java`같은 클래스 기반 객체지향 언어는 클래스를 사전에 정의하고 필요한 시점에 new 연산자와 함께 생성자(`constructor`)를 호출하여 인스턴스를 생성하는 방식으로 객체를 생성한다.  
-하지만, 자바스크립트는 프로토타입 기반 객체지향 언어로서 클래스 기반 객체지향 언어와는 달리 다양한 객체 생성 방법이 있다.
+하지만, 자바스크립트는 프로토타입 기반 객체지향 언어로서 클래스 기반 객체지향 언어와는 달리 다양한 객체 생성 방법이 있다.  
+
+※객체를 생성하는 방법  
 - 객체 리터럴
 - `object` 생성자 함수
 - 생성자 함수
@@ -127,6 +129,7 @@ var foo = {
 };
 
 console.log(foo); // {"": ""}
+console.log(foo['']) // '' 접근할때는 []로만 가능
 ```
 
 <br>
@@ -288,7 +291,35 @@ delete person.age;
 delete person.address;
 
 console.log(person); // {name: "Lee"}
+
+
+// 프로퍼티를 지울 수 없게 생성하기
+Object.defineProperty(person, 'age', {value:20, configurable:false}) 
+delete person.age // false
+console.log(person); // {name: "Lee", age: 20}
 ```
+
+전역 객체로 생성하는 경우 특이한 점
+```javascript
+// window 객체에 프로퍼티를 추가하는 경우
+window.a = 10
+console.log(window.a) // 10
+
+delete window.a // true
+console.log(window.a) // undefined
+
+
+// var 키워드로 생성하는 경우
+var a = 10
+console.log(window.a) // 10
+
+delete window.a // false
+console.log(window.a) // 10
+```
+var 키워드로 전역변수를 생성하는 경우  
+위에서 확인한 `Object.defineProperty()` 함수로 `configurable:false`를 준것과 동일하게 프로퍼티를 생성하는 듯!  
+
+<br>
 
 ## 9.ES6에서 추가된 객체 리터럴의 확장 기능
 ES6에서 추가된 객체 리터럴 확장기능
@@ -419,3 +450,4 @@ obj.foo.hasOwnProperty('prototype'); // -> false
 // obj.bar는 constructor인 일반 함수이므로 prototype 프로퍼티가 있다.
 obj.bar.hasOwnProperty('prototype'); // -> true
 ```
+![이미지](https://user-images.githubusercontent.com/80154058/142414143-6e3548b6-6490-4c88-b621-197bf96a9cd9.png)
