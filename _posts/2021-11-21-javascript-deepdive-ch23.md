@@ -254,6 +254,7 @@ window.__proto__.__proto__.__proto__.__proto__ === Object.prototype; // -> true
 
 >`let`, `const` 키워드로 선언한 변수도 변수 호이스팅이 발생한다.  
 단 런타임에 제어가 변수 선언문에 도달하기 전까지 일시적 사각지대(TDZ)에 빠지기 때문에 참조할 수 없다.
+
 ```javascript
 let foo = 1; // 전역 변수
 
