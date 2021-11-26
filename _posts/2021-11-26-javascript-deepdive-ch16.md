@@ -7,7 +7,7 @@ tags:
  - Javascript
 toc: true
 toc_sticky: true
-last_modified_at: 2021-11-25
+last_modified_at: 2021-11-26
 ---
 
 # 프로퍼티 어트리뷰트
