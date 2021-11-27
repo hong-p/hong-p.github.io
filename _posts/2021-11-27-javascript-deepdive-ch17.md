@@ -173,7 +173,7 @@ console.log(radius); // 15
 
 `new`연산자와 함께 생성자 함수를 호출하면 다음과 같은 과정을 거쳐 암묵적으로 인스턴스를 생성하고 초기화한뒤 반환한다.
 
-**1.인스턴스 생성과 this 바인딩**
+**1.인스턴스 생성과 this 바인딩**  
 암묵적으로 빈 객체가 생성된다. 그리고 암묵적으로 생성된 빈 객체는 `this`에 바인딩된다.  
 이 처리는 함수 몸체의 코드가 한 줄씩 실행되는 런타임 이전에 실행된다.
 ```javascript
@@ -188,7 +188,7 @@ function Circle(radius) {
 }
 ```
 
-**2.인스턴스 초기화**
+**2.인스턴스 초기화**   
 생성자 함수에 기술되어 있는 코드가 한 줄씩 실행되어 `this`에 바인딩되어 있는 인스턴스를 초기화한다.  
 인스턴스에 프로퍼티나 메서드를 추가하고 생성자 함수가 인수로 전달받은 초기값을 할당한다.
 ```javascript
@@ -203,7 +203,7 @@ function Circle(radius) {
 }
 ```
 
-**3.인스턴스 반환**
+**3.인스턴스 반환**  
 생성자 함수 내부의 모든 처리가 끝나면 완성된 인스턴스가 바인딩된 `this`가 암묵적으로 반환된다.
 ```javascript
 function Circle(radius) {
@@ -346,6 +346,141 @@ new obj.x(); // TypeError: obj.x is not a constructor
 ```
 
 ### 2.6 new 연산자
+일반 함수와 생성자 함수에 특별한 형식적 차이는 없다. `new`연산자와 함께 함수를 호출하면 해당 함수는 생성자 함수로 동작한다.  
+함수 객체의 내부 메서드 `[[Call]]`이 호출되는 것이 아니라 `[[Construct]]`가 호출된다. 단 함수는 `constructor`이어야 한다. `non-constructor`는 안된다.
+```javascript
+// 생성자 함수로서 정의하지 않은 일반 함수
+function add(x, y) {
+  return x + y;
+}
 
+// 생성자 함수로서 정의하지 않은 일반 함수를 new 연산자와 함께 호출
+let inst = new add();
+// 함수가 객체를 반환하지 않았으므로 반환문이 무시된다. 따라서 빈 객체가 생성되어 반환된다.
+console.log(inst); // {}
 
+// 객체를 반환하는 일반 함수
+function createUser(name, role) {
+  return { name, role };
+}
 
+// 생성자 함수로서 정의하지 않은 일반 함수를 new 연산자와 함께 호출
+inst = new createUser('Lee', 'admin');
+// 함수가 생성한 객체를 반환한다.
+console.log(inst); // {name: "Lee", role: "admin"}
+```
+
+반대로 `new`연산자 없이 호출하면 일반 함수로 호출된다.
+```javascript
+// 생성자 함수
+function Circle(radius) {
+  this.radius = radius;
+  this.getDiameter = function () {
+    return 2 * this.radius;
+  };
+}
+
+// new 연산자 없이 생성자 함수 호출하면 일반 함수로서 호출된다.
+const circle = Circle(5);
+console.log(circle); // undefined
+
+// 일반 함수 내부의 this는 전역 객체 window를 가리킨다.
+console.log(radius); // 5
+console.log(getDiameter()); // 10
+
+circle.getDiameter();
+// TypeError: Cannot read property 'getDiameter' of undefined
+```
+
+`Circle`함수를 `new`연산자와 함께 생성자 함수로서 호출하면 함수 내부의 `this`는 `Circle` 인스턴스를 가리킨다.  
+하지만 `Circle`함수를 일반 함수로 호출하면 함수 내부의 `this`는 `window`를 가리킨다.
+
+### 2.7 new.target
+ES6에서는 `new.target`을 지원한다.   
+생성자 함수가 `new`연산자 없이 호출되는 것을 방지하기 위해 파스칼 케이스 컨벤션을 사용하지만, 그래도 실수는 발생할 수 있다.  
+
+`new.target`연산자는 `this`와 유사하게 `constructor`인 모든 함수 내부에서 암묵적인 지역변수와 같이 사용되며 **메타 프로퍼티**라고 부른다.(IE는 지원안함)  
+
+`new`연산자와 함께 생성자 함수로서 호출되면 함수 내부의 `new.target`은 함수 자신을 가리킨다. `new`연산자 없이 일반 함수로 호출되면 `undefined`를 반환한다.
+```javascript
+// 생성자 함수
+function Circle(radius) {
+  // 이 함수가 new 연산자와 함께 호출되지 않았다면 new.target은 undefined다.
+  if (!new.target) {
+    // new 연산자와 함께 생성자 함수를 재귀 호출하여 생성된 인스턴스를 반환한다.
+    return new Circle(radius);
+  }
+
+  this.radius = radius;
+  this.getDiameter = function () {
+    return 2 * this.radius;
+  };
+}
+
+// new 연산자 없이 생성자 함수를 호출하여도 new.target을 통해 생성자 함수로서 호출된다.
+const circle = Circle(5);
+console.log(circle.getDiameter());
+```
+
+※ 스코프 세이프 생정자 패턴`scope-safe constructor`
+`new.target`을 사용할 수 없는 상황이라면 스코프 세이프 생성자 패턴을 사용할 수 있다.
+`instanceof` 연산자를 활용한다.
+```javascript
+// Scope-Safe Constructor Pattern
+function Circle(radius) {
+  // 생성자 함수가 new 연산자와 함께 호출되면 함수의 선두에서 빈 객체를 생성하고
+  // this에 바인딩한다. 이때 this와 Circle은 프로토타입에 의해 연결된다.
+
+  // 이 함수가 new 연산자와 함께 호출되지 않았다면 이 시점의 this는 전역 객체 window를 가리킨다.
+  // 즉, this와 Circle은 프로토타입에 의해 연결되지 않는다.
+  if (!(this instanceof Circle)) {
+    // new 연산자와 함께 호출하여 생성된 인스턴스를 반환한다.
+    return new Circle(radius);
+  }
+
+  this.radius = radius;
+  this.getDiameter = function () {
+    return 2 * this.radius;
+  };
+}
+
+// new 연산자 없이 생성자 함수를 호출하여도 생성자 함수로서 호출된다.
+const circle = Circle(5);
+console.log(circle.getDiameter()); // 10
+```
+
+<br>
+
+※ 빌트인 생성자 함수
+참고로 대부분의 빌트인 생성자 함수(`Object`, `String`, `Number`, `Boolean`, `Function`, `Array`, `Date`, `RegExp`, `Promise`등)는 `new`연산자와 함께 호출되었는지를 확인한 후 적절한 값을 반환한다.  
+예를들어 `Object`와 `Function`함수는 `new`연산자 없이 호출해도 `new`연산자와 함께 호출한 경우와 동일하게 동작한다.  
+
+`Object`, `Function`
+```javascript
+let obj = new Object();
+console.log(obj); // {}
+
+obj = Object();
+console.log(obj); // {}
+
+let f = new Function('x', 'return x ** x');
+console.log(f); // ƒ anonymous(x) { return x ** x }
+
+f = Function('x', 'return x ** x');
+console.log(f); // ƒ anonymous(x) { return x ** x }
+```
+
+반면 `String`, `Number`, `Boolean`은 `new`연산자와 함께 호출했을 때 객체를 생성하여 반환하지만,  
+`new`연산자 없이 호출하면 문자열, 숫자, 불리언 원시 값을 반환한다.  
+
+`String`, `Number`, `Boolean`
+```javascript
+const str = String(123);
+console.log(str, typeof str); // 123 string
+
+const num = Number('123');
+console.log(num, typeof num); // 123 number
+
+const bool = Boolean('true');
+console.log(bool, typeof bool); // true boolean
+```
