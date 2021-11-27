@@ -10,7 +10,7 @@ toc_sticky: true
 last_modified_at: 2021-11-09
 ---
 
-# 변수(variable)
+# 4장 변수(variable)
 
 ## 1.변수란 무엇인가?
 변수는 프로그래밍 언어에서 데이터를 관리하기 위한 핵심 개념이다.  

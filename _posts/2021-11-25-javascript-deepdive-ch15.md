@@ -10,7 +10,7 @@ toc_sticky: true
 last_modified_at: 2021-11-25
 ---
 
-# let, const키워드와 블록 레벨 스코프
+# 15장 let, const키워드와 블록 레벨 스코프
 
 ## 1.var 키워드로 선언한 변수의 문제점
 

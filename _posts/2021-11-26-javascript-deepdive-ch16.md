@@ -10,7 +10,7 @@ toc_sticky: true
 last_modified_at: 2021-11-26
 ---
 
-# 프로퍼티 어트리뷰트
+# 16장 프로퍼티 어트리뷰트
 
 ## 1.내부 슬롯과 내부 메서드
 내부 슬롯과 내부 메서드는 자바스크립트 엔진의 구현 알고리즘을 설명하기 위해 ECMAScript 사양에서 사용하는 의사 프로퍼티`pseudo property`와 의사 메서드`pseudo method`다.  
