@@ -33,6 +33,7 @@ person.sayHello(); // Hi! My name is Lee
 new 연산자와 함께 호출하여 객체(인스턴스)를 생성하는 함수.  
 생성자 함수에 의해 생성된 객체를 인스턴스(instance)라고 한다.  
 Object 생성자 함수 외에도 String, Number, Boolean, Function, Array, Date, RegExp, Promise등의 빌트인 생성자 함수를 제공한다.
+
 ```javascript
 // String 생성자 함수에 의한 String 객체 생성
 const strObj = new String('Lee');
