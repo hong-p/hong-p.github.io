@@ -31,18 +31,6 @@ layout: default
             <!-- <p class="page__meta"><i class="far fa-clock" aria-hidden="true"></i> {% include read-time.html %}</p> -->
             <p class="page__date"><i class="fas fa-fw fa-calendar-alt" aria-hidden="true"></i> {{ site.data.ui-text[site.locale].date_label | default: "Updated:" }} <time datetime="{{ page.date | date_to_xmlschema }}">{{ page.date | date: "%B %d, %Y" }}</time></p>
           {% endif %}
-          <!-- 광고 넣기 시작 -->
-          <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2251786384152348"
-              crossorigin="anonymous"></script>
-          <!-- 시작광고 -->
-          <ins class="adsbygoogle"
-              style="display:inline-block;width:720px;height:90px"
-              data-ad-client="ca-pub-2251786384152348"
-              data-ad-slot="2381535075"></ins>
-          <script>
-              (adsbygoogle = window.adsbygoogle || []).push({});
-          </script>
-          <!-- 광고 넣기 끝 -->
         </header>
       {% endunless %}
 
@@ -55,6 +43,18 @@ layout: default
             </nav>
           </aside>
         {% endif %}
+        <!-- 광고 넣기 시작 -->
+        <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2251786384152348"
+            crossorigin="anonymous"></script>
+        <!-- 시작광고 -->
+        <ins class="adsbygoogle"
+            style="display:inline-block;width:720px;height:90px"
+            data-ad-client="ca-pub-2251786384152348"
+            data-ad-slot="2381535075"></ins>
+        <script>
+            (adsbygoogle = window.adsbygoogle || []).push({});
+        </script>
+        <!-- 광고 넣기 끝 -->
         {{ content }}
         {% if page.link %}<div><a href="{{ page.link }}" class="btn btn--primary">{{ site.data.ui-text[site.locale].ext_link_label | default: "Direct Link" }}</a></div>{% endif %}
       </section>
