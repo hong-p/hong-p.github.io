@@ -308,6 +308,3 @@ defaults:
       comments: false
       share: true
       related: false
-
-gems:
-  - jekyll-feed
