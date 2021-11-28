@@ -57,7 +57,8 @@ layout: default
             (adsbygoogle = window.adsbygoogle || []).push({});
         </script>
         <!-- 광고 넣기 끝 -->
-        <br>
+        <br/>
+        
         {{ content }}
         {% if page.link %}<div><a href="{{ page.link }}" class="btn btn--primary">{{ site.data.ui-text[site.locale].ext_link_label | default: "Direct Link" }}</a></div>{% endif %}
       </section>
@@ -72,6 +73,8 @@ layout: default
         {% elsif page.date %}
           <p class="page__date"><strong><i class="fas fa-fw fa-calendar-alt" aria-hidden="true"></i> {{ site.data.ui-text[site.locale].date_label | default: "Updated:" }}</strong> <time datetime="{{ page.date | date_to_xmlschema }}">{{ page.date | date: "%B %-d, %Y" }}</time></p>
         {% endif %}
+        <br/>
+
         <!-- footer 광고 시작 -->
         <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2251786384152348"
             crossorigin="anonymous"></script>
