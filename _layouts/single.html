@@ -62,20 +62,6 @@ layout: default
         {% if page.link %}<div><a href="{{ page.link }}" class="btn btn--primary">{{ site.data.ui-text[site.locale].ext_link_label | default: "Direct Link" }}</a></div>{% endif %}
       </section>
 
-      <!-- footer 광고 시작 -->
-      <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2251786384152348"
-          crossorigin="anonymous"></script>
-      <!-- 마지막footer -->
-      <ins class="adsbygoogle"
-          style="display:block"
-          data-ad-client="ca-pub-2251786384152348"
-          data-ad-slot="5253017099"
-          data-ad-format="auto"
-          data-full-width-responsive="true"></ins>
-      <script>
-          (adsbygoogle = window.adsbygoogle || []).push({});
-      </script>
-      <!-- footer 광고 끝 -->
       <footer class="page__meta">
         {% if site.data.ui-text[site.locale].meta_label %}
           <h4 class="page__meta-title">{{ site.data.ui-text[site.locale].meta_label }}</h4>
@@ -86,6 +72,20 @@ layout: default
         {% elsif page.date %}
           <p class="page__date"><strong><i class="fas fa-fw fa-calendar-alt" aria-hidden="true"></i> {{ site.data.ui-text[site.locale].date_label | default: "Updated:" }}</strong> <time datetime="{{ page.date | date_to_xmlschema }}">{{ page.date | date: "%B %-d, %Y" }}</time></p>
         {% endif %}
+        <!-- footer 광고 시작 -->
+        <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2251786384152348"
+            crossorigin="anonymous"></script>
+        <!-- 마지막footer -->
+        <ins class="adsbygoogle"
+            style="display:block"
+            data-ad-client="ca-pub-2251786384152348"
+            data-ad-slot="5253017099"
+            data-ad-format="auto"
+            data-full-width-responsive="true"></ins>
+        <script>
+            (adsbygoogle = window.adsbygoogle || []).push({});
+        </script>
+        <!-- footer 광고 끝 -->
       </footer>
 
       {% if page.share %}{% include social-share.html %}{% endif %}
