@@ -236,7 +236,7 @@ console.log(sum(1, 2, 3, 4, 5)); // 15
 > foo(1, 2, 3, 4, 5);
 > ```
 
-> Spread 연산자(Spread Operator)  
+> ※ Spread 연산자(Spread Operator)  
 > Spread 연산자는 연산자의 대상 배열 또는 이터러블을 개별 요소로 분리한다.  
 > 
 > 배열에서 사용하기
