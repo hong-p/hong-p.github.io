@@ -225,9 +225,9 @@ console.log(sum(1, 2));          // 3
 console.log(sum(1, 2, 3, 4, 5)); // 15
 ```
 
-> ※ Rest 파라미터(Rest parameter)
-> Rest파라미터는 `spread`연산자(`...`)를 사용해서 함수의 매개변수를 작성한 형태이다.
-> Rest파라미터를 사용하면 함수의 매개변수로 넘어오는 인자를 배열로 전달받을 수 있다.
+> ※ Rest 파라미터(Rest parameter)  
+> Rest파라미터는 `spread`연산자(`...`)를 사용해서 함수의 매개변수를 작성한 형태이다.  
+> Rest파라미터를 사용하면 함수의 매개변수로 넘어오는 인자를 배열로 전달받을 수 있다.  
 > ```javascript
 > function foo(...rest) {
 >   console.log(Array.isArray(rest)); // true
@@ -235,4 +235,55 @@ console.log(sum(1, 2, 3, 4, 5)); // 15
 > }
 > foo(1, 2, 3, 4, 5);
 > ```
+
+> Spread 연산자(Spread Operator)  
+> Spread 연산자는 연산자의 대상 배열 또는 이터러블을 개별 요소로 분리한다.  
+> 
+> 배열에서 사용하기
+> ```javascript
+> var arr = [1,2];
+> 
+> // ...arr은 [1,2]를 개별 요소로 분리한다.
+> var newArr = [...arr, 4,5];
+> 
+> console.log(newArr);  // [1,2,4,5]
+> ```
+> 
+> 객체에서 사용하기
+> ```javascript
+> var obj = {
+>   name: 'inyong',
+>   age: 20
+> }
+> // {name: "inyong", age: 20}
+> 
+> var newObj = {
+>   ...obj,
+>   addr: '천안시'
+> }
+> // {name: "inyong", age: 20, addr: "천안시"}
+> ```
+
+
+### 2.2 caller 프로퍼티
+ECMAScript 사양에 포함되지 않은 비표준 프로퍼티이다.  
+함수 객체의 `caller`프로퍼티는 함수 자신을 호출한 함수를 가리킨다.  
+중요하지 않으니 넘어가도 된다.
+
+### 2.3 lenght 프로퍼티
+함수 객체의 `lenght`프로퍼티는 함수를 정의할 때 선언한 매개변수의 개수를 가리킨다.
+```javascript
+function foo() {}
+console.log(foo.length); // 0
+
+function bar(x) {
+  return x;
+}
+console.log(bar.length); // 1
+
+function baz(x, y) {
+  return x * y;
+}
+console.log(baz.length); // 2
+```
 
