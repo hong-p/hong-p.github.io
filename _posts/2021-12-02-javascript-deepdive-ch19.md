@@ -253,7 +253,7 @@ console.log(obj.x); // 1
 `Object.setPrototypeOf`는 `set Object.prototype.__proto__`와 일치
 
 
-## 3.2 함수 객체의 prototype 프로퍼티
+### 3.2 함수 객체의 prototype 프로퍼티
 
 
 
