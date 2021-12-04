@@ -164,7 +164,7 @@ console.log(circle2.getArea()); // 12.566370614359172
 
 <br>
 
-`__proto__`**는 접근자 프로퍼티다.**  
+**1)**`__proto__`**는 접근자 프로퍼티다.**  
 [16장 3.2 절의 접근자 프로퍼티](https://hong-p.github.io/javascript/javascript-deepdive-ch16/#3%EB%8D%B0%EC%9D%B4%ED%84%B0-%ED%94%84%EB%A1%9C%ED%8D%BC%ED%8B%B0%EC%99%80-%EC%A0%91%EA%B7%BC%EC%9E%90-%ED%94%84%EB%A1%9C%ED%8D%BC%ED%8B%B0)에서 살펴본 것처럼 접근자 프로퍼티는 자체적인 값`[[Value]]`을 갖지 않고, 접근자 함수`[[Get]]`, `[[Set]]` 프로퍼티 어트리뷰트로 구성된 프로퍼티다.  
 
 ![image](https://user-images.githubusercontent.com/80154058/144704599-862519bd-50a6-4522-bd0d-334ebc8a17b4.png)
@@ -183,7 +183,7 @@ console.log(obj.x); // 1
 
 <br>
 
-`__proto__`**접근자 프로퍼티는 상속을 통해 사용된다.**  
+**2)**`__proto__`**접근자 프로퍼티는 상속을 통해 사용된다.**  
 `__proto__` 접근자 프로퍼티는 객체가 직접 소유하는 프로퍼티가 아니라 `Object.prototype`의 프로퍼티이다. 상속을 통해 `Object.prototype.__proto__` 접근자 프로퍼티를 사용할 수 있다.
 ```javascript
 const person = { name: 'Lee' };
@@ -201,7 +201,7 @@ console.log({}.__proto__ === Object.prototype); // true
 
 <br>
 
-`__proto__`**접근자 프로퍼티를 통해 프로토타입에 접근하는 이유**  
+**3)**`__proto__`**접근자 프로퍼티를 통해 프로토타입에 접근하는 이유**  
 `[[Prototype]]`내부 슬롯의 값에 접근할때 접근자 프로퍼티를 사용하는 이유는 상호 참조에 의해 프로토 타입 체인이 생성되는 것을 방지하기 위해서다.  
 
 상호 참조(순환 참조)를 시도하면 `TypeError`를 발생시킨다.  
@@ -218,7 +218,7 @@ parent.__proto__ = child; // TypeError: Cyclic __proto__ value
 
 <br>
 
-`__proto__` **접근자 프로퍼티를 코드 내에서 직접 사용하는 것은 권장하지 않는다.**  
+**4)**`__proto__` **접근자 프로퍼티를 코드 내에서 직접 사용하는 것은 권장하지 않는다.**  
 ES5까지는 비표준이었다. 하지만 일부 브라우저에서 `__proto__`를 지원해 호환성을 위해 ES6에 표준으로 채택하였다.  
 
 하지만 `__proto__`접근자 프로퍼티를 코드내에서 직접 사용하는 것은 권장하지 않는다. 모든 객체가 `__proto__`접근자 프로퍼티를 사용하는 것은 아니기 때문이다.  
