@@ -287,3 +287,68 @@ function baz(x, y) {
 console.log(baz.length); // 2
 ```
 
+### 2.4 name 프로퍼티
+함수 객체의 `name`프로퍼티는 함수 이름을 나타낸다.  
+ES6이전에는 비표준이었지만 ES6부터 정식 표준이 되었다.  
+ES5와 ES6에서 동작을 다르게 하므로 주의해야 한다.  
+익명 함수 표현식의 경우 ES5에서는 `name`프로퍼티는 빈 문자열을 값으로 갖고,  
+ES6에서는 함수 객체를 가리키는 식별자를 값으로 갖는다.
+```javascript
+// 기명 함수 표현식
+var namedFunc = function foo() {};
+console.log(namedFunc.name); // foo
+
+// 익명 함수 표현식
+var anonymousFunc = function() {};
+// ES5: name 프로퍼티는 빈 문자열을 값으로 갖는다.
+// ES6: name 프로퍼티는 함수 객체를 가리키는 변수 이름을 값으로 갖는다.
+console.log(anonymousFunc.name); // anonymousFunc
+
+// 함수 선언문(Function declaration)
+function bar() {}
+console.log(bar.name); // bar
+```
+[함수 선언문](https://hong-p.github.io/javascript/javascript-deepdive-ch12/#41-%ED%95%A8%EC%88%98-%EC%84%A0%EC%96%B8%EB%AC%B8)에서 살펴 봤듯이 **함수 이름**과 함수 객체를 가리키는 **식별자**는 의미가 다르다는 점을 다시 한번 상기하자.  
+
+### 2.5 __proto__ 접근자 프로퍼티
+모든 객체는 `[[Prototype]]`이라는 내부 슬롯을 갖는다.  
+`[[Prototype]]`내부 슬롯은 상속을 구현하는 **프로토타입 객체**를 가리킨다.  
+
+`__proto__`프로퍼티는 `[[Prototype]]`내부 슬롯이 가리키는 프로토타입 객체에 접근하기 위해 사용하는 접근자 프로퍼티다. 내부슬롯에 직접 접근할 수 없어 간접적으로 접근하기 위한 프로퍼티이다.
+```javascript
+const obj = { a: 1 };
+
+// 객체 리터럴 방식으로 생성한 객체의 프로토타입 객체는 Object.prototype이다.
+console.log(obj.__proto__ === Object.prototype); // true
+
+// 객체 리터럴 방식으로 생성한 객체는 프로토타입 객체인 Object.prototype의 프로퍼티를 상속받는다.
+// hasOwnProperty 메서드는 Object.prototype의 메서드다.
+console.log(obj.hasOwnProperty('a'));         // true
+console.log(obj.hasOwnProperty('__proto__')); // false
+```
+
+### 2.6 prototype 프로퍼티
+`prototype`프로퍼티는 생성자 함수로 호출할 수 있는 **함수 객체**, 즉 `constructor`만이 소유하는 프로퍼티다.  
+일반 객체와 생성자 함수로 호출할 수 없는 `non-constructor`에는 `prototype`프로퍼티가 없다.
+```javascript
+// 함수 객체는 prototype 프로퍼티를 소유한다.
+(function () {}).hasOwnProperty('prototype'); // -> true
+
+function Person(){}
+Person.hasOwnProperty('prototype');  // -> true
+
+
+// 일반 객체는 prototype 프로퍼티를 소유하지 않는다.
+var p1 = new Person();
+p1.hasOwnProperty('prototype');  // -> false
+
+({}).hasOwnProperty('prototype'); // -> false
+```
+`prototype`프로퍼티는 생성자 함수로 호출될 때 생성자 함수가 생성할 **인스턴스의 프로토타입 객체를 가리킨다.**
+```javascript
+function Person(){}
+var p1 = new Person();
+
+// Person 함수 객체의 prototype과 인스턴스의 프로토타입 객체는 같다.
+Person.prototype === p1.__proto__  // true
+```
