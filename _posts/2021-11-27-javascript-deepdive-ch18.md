@@ -176,10 +176,13 @@ console.log(sum(1, 2));    // 3
 console.log(sum(1, 2, 3)); // 6
 ```
 
+<br>
 
-
-`arguments`객체는 유사 배열 객체이면서 동시에 이터러블`iterable`이다.  
-`iterable`객체는 `for...in`, `for...of`문을 사용할 수 있다.
+※ 유사 배열 객체와 이터러블  
+ES6에 도입된 이터레이션 프로토콜을 준수하면 순회 가능한 자료구조인 이터러블이 된다.  
+이터러블의 개념이 없었던 ES6에서 `arguments`객체는 유사 배열 객체로 구분되었다.  
+ES6부터 `arguments`객체는 유사 배열 객체이면서 동시에 이터러블`iterable`이다.  
+`iterable`객체는 `for...in`, `for...of`문을 사용할 수 있다.  
 
 ```javascript
 function foo(){
@@ -192,3 +195,44 @@ foo(1,2,3);
 // 2
 // 3
 ```
+
+유사 배열 객체는 배열이 아니다.  
+그러므로 배열 메서드를 사용할 수 없다.  
+배열 메서드를 사용하기 우해서는 `Function.prototype.call`, `Function.prototype.apply`를 사용해 간접 호출해야 한다.
+
+```javascript
+function sum() {
+  // arguments 객체를 배열로 변환
+  const array = Array.prototype.slice.call(arguments);
+  // 배열로 만들었기 떄문에 reduce 메서드를 사용할 수 있다.
+  return array.reduce(function (pre, cur) {
+    return pre + cur;
+  }, 0);
+}
+
+console.log(sum(1, 2));          // 3
+console.log(sum(1, 2, 3, 4, 5)); // 15
+```
+
+ES6에서는 Rest문법을 활용해 쉽게 해결할 수 있다.
+```javascript
+// ES6 Rest parameter
+function sum(...args) {
+  return args.reduce((pre, cur) => pre + cur, 0);
+}
+
+console.log(sum(1, 2));          // 3
+console.log(sum(1, 2, 3, 4, 5)); // 15
+```
+
+> ※ Rest 파라미터(Rest parameter)
+> Rest파라미터는 `spread`연산자(`...`)를 사용해서 함수의 매개변수를 작성한 형태이다.
+> Rest파라미터를 사용하면 함수의 매개변수로 넘어오는 인자를 배열로 전달받을 수 있다.
+> ```javascript
+> function foo(...rest) {
+>   console.log(Array.isArray(rest)); // true
+>   console.log(rest); // [ 1, 2, 3, 4, 5 ]
+> }
+> foo(1, 2, 3, 4, 5);
+> ```
+
