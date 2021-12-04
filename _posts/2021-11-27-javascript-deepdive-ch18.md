@@ -7,7 +7,7 @@ tags:
  - Javascript
 toc: true
 toc_sticky: true
-last_modified_at: 2021-11-27
+last_modified_at: 2021-12-04
 ---
 
 # 18장 함수와 일급 객체
