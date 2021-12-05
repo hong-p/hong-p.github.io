@@ -1193,3 +1193,45 @@ for (const value of arr) {
   console.log(value); // 1 2 3
 };
 ```
+
+### 14.2 Object.keys/values/entries 메서드
+`for...in`문은 객체 자신의 고유 프로퍼티 뿐만 아니라 상속받은 프로퍼티도 열거한다.  
+
+그렇기 때문에 고유의 프로퍼티만 열거하기 위해서는  
+`Object.keys`, `Object.valeus`, `Object.entries` 메서드 사용을 권장한다.  
+
+1)`Object.keys`  
+객체 자신의 열거가능한(`enumerable`)**프로퍼티 키**를 배열로 반환한다.  
+```javascript
+const person = {
+  name: 'Lee',
+  address: 'Seoul',
+  __proto__: { age: 20 }
+};
+
+console.log(Object.keys(person)); // ["name", "address"]
+```
+
+  
+
+2)`Object.values`  
+ES8에서 도입되었다.  
+객체 자신의 열거 가능한 **프로퍼티 값**을 배열로 반환한다.
+```javascript
+console.log(Object.values(person)); // ["Lee", "Seoul"]
+```
+
+  
+
+3)`Object.entries`  
+ES8에서 도입되었다.  
+객체 자신의 열거 가능한 프로퍼티 키와 값의 쌍의 배열을 배열에 담아 반환한다.
+```javascript
+console.log(Object.entries(person)); // [["name", "Lee"], ["address", "Seoul"]]
+
+Object.entries(person).forEach(([key, value]) => console.log(key, value));
+/*
+name Lee
+address Seoul
+*/
+```
