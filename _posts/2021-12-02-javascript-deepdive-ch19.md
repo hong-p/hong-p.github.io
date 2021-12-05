@@ -1200,7 +1200,9 @@ for (const value of arr) {
 그렇기 때문에 고유의 프로퍼티만 열거하기 위해서는  
 `Object.keys`, `Object.valeus`, `Object.entries` 메서드 사용을 권장한다.  
 
-1)`Object.keys`  
+<br>
+
+**1)**`Object.keys`  
 객체 자신의 열거가능한(`enumerable`)**프로퍼티 키**를 배열로 반환한다.  
 ```javascript
 const person = {
@@ -1212,18 +1214,18 @@ const person = {
 console.log(Object.keys(person)); // ["name", "address"]
 ```
 
-  
+<br>
 
-2)`Object.values`  
+**2)**`Object.values`  
 ES8에서 도입되었다.  
 객체 자신의 열거 가능한 **프로퍼티 값**을 배열로 반환한다.
 ```javascript
 console.log(Object.values(person)); // ["Lee", "Seoul"]
 ```
 
-  
+<br>
 
-3)`Object.entries`  
+**3)**`Object.entries`  
 ES8에서 도입되었다.  
 객체 자신의 열거 가능한 프로퍼티 키와 값의 쌍의 배열을 배열에 담아 반환한다.
 ```javascript
