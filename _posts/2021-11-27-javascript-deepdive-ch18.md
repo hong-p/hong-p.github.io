@@ -113,7 +113,7 @@ console.log(Object.getOwnPropertyDescriptor(Object.prototype, '__proto__'));
 `arguments`프로퍼티는 ES3부터 폐지되어 일부 브라우저에서만 지원하고 있다.  
 따라서 `Function.arguments`와 같은 사용법은 권장지 않음.  
 
-자바스크립트는 매개변수와 인수의 개수가 일치하는지 확인하지 않는다.  
+**자바스크립트는 매개변수와 인수의 개수가 일치하는지 확인하지 않는다.** 
 따라서 함수 호출시 매개변수 개수만큼 인수를 전달하지 않아도 에러가 발생하지 않는다.  
 선언된 매개변수의 개수보다 인수를 적게 전달한경우 `undefined`으로 초기화된 상태로 유지된다.  
 초과된 인수는 무시된다.(but, `arguments`객체에는 보관됨)  
