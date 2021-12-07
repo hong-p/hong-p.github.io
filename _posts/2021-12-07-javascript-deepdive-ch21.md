@@ -13,10 +13,10 @@ last_modified_at: 2021-12-07
 # 21장 빌트인 객체
 
 ## 1.자바스크립트 객체의 분류
-- 표준 빌트인 객체(Standard built-in objects)
+- 표준 빌트인 객체(Standard built-in objects)  
 표준 빌트인 객체는 ECMAScript 사양에 정의된 객체를 말하며, 애플리케이션 전역의 공통 기능을 제공한다. `Object`, `String`, `Number`, `Boolean`, `Symbol`, `Date`, `Math`, `RegExp`, `Array`, `Map/Set`, `WeakMap`, `WeakSet`, `Function`, `Promise`, `Reflect`, `Proxy`, `JSON`, `Error`등 40여개 객체를 제공한다.  
 
-- 호스트 객체(host objects)
+- 호스트 객체(host objects)  
 호스트 객체는 ECMAScript 사양에 정의되어 있지 않지만 자바스크립트 실행 환경(브라우저 환경 또는 Node.js환경)에서 추라고 제공하는 객체를 말한다.  
 브라우저 환경에서는 `DOM`, `BOM`, `Canvas`, `XMLHttpRequest`, `fetch`, `requestAnimationFrame`, `SVG`, `Web Storage`, `Web Component`, `Web Worker`와 같은 [클라이언트 사이드 Web API](https://developer.mozilla.org/ko/docs/Web/API)를 호스트 객체로 제공하고,  
 Node.js환경에서는 [Node.js고유의 API](https://nodejs.org/api/)를 호스트 객체로 제공한다.  
@@ -155,12 +155,14 @@ console.log(typeof num, num); // number 1.5
 전역 객체의 특징
 - 전역 객체는 개발자가 의도적으로 생성할 수 없다. 즉, 전역 객체를 생성할 수 있는 생성자 함수가 제공되지 않는다.
 - 전역 객체의 프로퍼티를 참조할 때 `window`(또는 `global`)를 생략할 수 있다.
+
 ```javascript
 window.parseInt === parseInt; // -> true
 ```
 - 전역 객체는 `Object`, `String`, `Number`, `Boolean`등 모든 표준 빌트인 객체를 프로퍼티로 가지고 있다.
 - 자바스크립트 실행환경(브라우저 또는 Node.js)에 따라 추가적인 프로퍼티와 메서드를 갖는다.(브라우저: DOM, BOM, Canvas, XMLHttpRequest등 / Node.js: Node.js 고유의 API)
 - `var`키워드로 선언한 전역 변수, 선언하지 않은 변수에 값을 할당한 암묵적 전역, 전역 함수는 전역 객체의 프로퍼티가 된다.
+
 ```javascript
 // var 키워드로 선언한 전역 변수
 var foo = 1;
@@ -174,11 +176,14 @@ console.log(window.bar); // 2
 function baz() { return 3; }
 console.log(window.baz()); // 3
 ```
+
 - `let`이나 `const`키워드로 선언한 전역 변수는 전역 객체의 프로퍼티가 아니다.
+
 ```javascript
 let foo = 123;
 console.log(window.foo); // undefined
 ```
+
 - 브라우저 환경의 모든 자바스크립트 코드는 하나의 전역 객체 `window`를 공유한다.
 
 ### 4.1 빌트인 전역 프로퍼티
