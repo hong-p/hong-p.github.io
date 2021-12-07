@@ -556,6 +556,7 @@ dec = decodeURI(enc);
 console.log(dec);
 // name=이웅모&job=programmer&teacher
 ```
+
 ![image](https://user-images.githubusercontent.com/80154058/145044892-2e61223b-e71e-45c0-950d-9549bead4c06.png)
 
 
