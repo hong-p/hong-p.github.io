@@ -400,5 +400,8 @@ Person.prototype.name = 'Kim';
 // getName 메서드를 호출한 객체는 Person.prototype이다.
 console.log(Person.prototype.getName()); // ② Kim
 ```
+①의 경우 `getName`메서드를 호출한 객체는 `me`이다. 따라서 `getName`메서드 내부의 `this`는 `me`를 가리키며 `this.name`값은 `Lee`다.  
+
+②의 경우 `getName`메서드를 호출한 객체는 `Person.prototype`이고, 객체이므로 직접 메서드를 호출할 수 있다. 따라서 `getName`메서드 내부의 `this`는 `Person.prototype`을 가리키며 `this.name`값은 `Kim`이다.  
 
 ### 2.3 생성자 함수 호출
