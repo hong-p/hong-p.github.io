@@ -400,3 +400,5 @@ Person.prototype.name = 'Kim';
 // getName 메서드를 호출한 객체는 Person.prototype이다.
 console.log(Person.prototype.getName()); // ② Kim
 ```
+
+### 2.3 생성자 함수 호출
