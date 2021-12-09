@@ -457,7 +457,7 @@ console.log(circle3); // undefined
 console.log(radius); // 15
 ```
 
-일반 함수로 호출된 경우 `Circle`내부의 `this`는 전역 객체`window`를 가리키기 때문에 `this.radius`는 결국 `window.radius`가 되어 `console.log(radius);`를 실행하면 `window.radus`값이 리턴되어 출력되게된다.  
+일반 함수로 호출된 경우 `Circle`내부의 `this`는 전역 객체`window`를 가리키기 때문에 `this.radius`는 결국 `window.radius`가 되어 `console.log(radius);`를 실행하면 `window.radius`값이 리턴되어 출력되게된다.  
 
 ### 2.4 Function.prototype.apply/call/bind 메서드에 의한 간접 호출
 `apply`, `call`, `bind`메서드는 `Function.prototype`의 메서드다. 즉, 이들 메서드는 모든 함수가 상속받아 사용할 수 있다.  
