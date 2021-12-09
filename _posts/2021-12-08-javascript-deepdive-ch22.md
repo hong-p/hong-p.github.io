@@ -435,7 +435,7 @@ console.log(circle2.getDiameter()); // 20
 
 `new`연산자와 함께 호출하지 않으면 일반 함수로 호출된다.  
 `Circle`함수에 반환 값이 없으면 암묵적으로 `undefined`를 반환한다.
-※ [17장 생성자 함수에 의한 객체 생성 참조](https://hong-p.github.io/javascript/javascript-deepdive-ch17/#23-%EC%83%9D%EC%84%B1%EC%9E%90-%ED%95%A8%EC%88%98%EC%9D%98-%EC%9D%B8%EC%8A%A4%ED%84%B4%EC%8A%A4-%EC%83%9D%EC%84%B1-%EA%B3%BC%EC%A0%95)  
+[※ 17장 생성자 함수에 의한 객체 생성 참조](https://hong-p.github.io/javascript/javascript-deepdive-ch17/#23-%EC%83%9D%EC%84%B1%EC%9E%90-%ED%95%A8%EC%88%98%EC%9D%98-%EC%9D%B8%EC%8A%A4%ED%84%B4%EC%8A%A4-%EC%83%9D%EC%84%B1-%EA%B3%BC%EC%A0%95)  
 
 ```javascript
 // 생성자 함수
