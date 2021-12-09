@@ -13,7 +13,7 @@ last_modified_at: 2021-12-08
 # 22장 this
 
 ## 1.this 키워드
-[19.1절 객체지향 프로그래밍](https://hong-p.github.io/javascript/javascript-deepdive-ch19/#1-%EA%B0%9D%EC%B2%B4-%EC%A7%80%ED%96%A5-%ED%94%84%EB%A1%9C%EA%B7%B8%EB%9E%98%EB%B0%8D)에서 봤듯이 객체는 상태(`state`)를 나타내늗 프로퍼티와 동작(`behavior`)를 나타내는 메서드를 하나의 논리적인 단위로 묶은 복합적인 자료구조다.  
+[19.1절 객체지향 프로그래밍](https://hong-p.github.io/javascript/javascript-deepdive-ch19/#1-%EA%B0%9D%EC%B2%B4-%EC%A7%80%ED%96%A5-%ED%94%84%EB%A1%9C%EA%B7%B8%EB%9E%98%EB%B0%8D)에서 봤듯이 객체는 상태(`state`)를 나타내 프로퍼티와 동작(`behavior`)를 나타내는 메서드를 하나의 논리적인 단위로 묶은 복합적인 자료구조다.  
 
 동작을 나타내는 메서드는 자신이 속한 객체의 상태, 즉 프로퍼티를 참조하고 변경할 수 있어야 한다. 이때 자신이 속한 객체를 가리키는 식별자를 참조할 수 있어야 하는데, 이때 `this`를 사용한다.  
 
