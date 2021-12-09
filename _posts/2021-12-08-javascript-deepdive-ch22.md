@@ -596,7 +596,12 @@ person.foo(function () {
 });
 ```
 
-혹은, 콜백 함수를 화살표 함수로 선언해 해결이 가능하다.
+혹은, 콜백 함수를 화살표 함수로 선언해 해결이 가능하다.  
+참고로 화살표 함수는 자체의 `this`, `arguments`, `super`, `new.target` 바인딩을 갖지 않기 때문에 스코프 체인을 따라 상위 스코프의 `this`를 그대로 참조 한다. 이를 `lexical this`라고 한다.  
+
+아래와 같은 예제는 화살표 함수를 인수로 전달하기 때문에 화살표 함수는 `person.foo`메서드가 호출되면, `foo`함수 객체가 생성되고, 그에 따라 매개변수(`callback`)도 평가되고 화살표 함수 객체가 생성된다.  
+
+따라서 화살표 함수(`callback`)의 상위 스코프는 `person.foo`함수가 되어, 화살표 함수의 `this`는 `person.foo`함수에 바인딩된 `this`가 되고, 이`this`는 `person`을 가리키게 된다.
 ```javascript
 const person = {
   name: 'Lee',
