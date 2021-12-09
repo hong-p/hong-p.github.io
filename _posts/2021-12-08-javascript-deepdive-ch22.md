@@ -39,9 +39,10 @@ console.log(circle.getDiameter()); // 10
 1. 변수 호이스팅으로 `circle` 변수 생성(초기화는X)
 2. `circle`변수에 할당되기 직전에 객체 리터럴을 평가
 3. `circle`객체 생성
-4. `circle.getDiameter();`호출시 `getDiameter`메서드가 호출되어 함수 몸체 평가
+4. `circle.getDiameter();`즉, `getDiameter`메서드가 호출되어 함수 몸체가 실행된다.
+5. `getDiameter`메서드가 실행될 때 `circle`식별자를 참조한다.
 
-`circle.getDiameter();`호출하는 시점에는 이미 `circle`객체가 생성되어 있으므로 메서느 내부에서 `circle`식별자를 참조할 수 있다.  
+`circle.getDiameter();`호출하는 시점에는 이미 `circle`객체가 생성되어 있으므로 메서드 내부에서 `circle`식별자를 참조할 수 있다.  
 
 하지만 자신이 속한 객체를 재귀적으로 참조하는 방식은 바람직하지 않다.  
 
