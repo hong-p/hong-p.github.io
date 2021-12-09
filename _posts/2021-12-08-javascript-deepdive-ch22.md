@@ -142,7 +142,7 @@ const me = new Person('Lee');
 
 `this`는 객체의 메서드 내부 또는 생성자 함수 내부에서만 의미가 있다.  
 
-일반 함수 내부의 `this`는 `window`가 바인딩되고, `strict mode`에서는 `undefined`가 바인딩된다.
+일반 함수 내부의 `this`는 `window`가 바인딩되고, `strict mode`에서는 `undefined`가 바인딩된다.(굳이 필요없기 때문에)
 ```javascript
 (function(){
     'use strict';
