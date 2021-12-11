@@ -152,6 +152,10 @@
 
 .grid__item {
   margin-bottom: 2em;
+  padding-left: 6px;
+  padding-bottom: 6px;
+  border: 2px dashed #878585;
+  border-radius: 10px;
 
   @include breakpoint($small) {
     float: left;
@@ -171,7 +175,7 @@
   @include breakpoint($medium) {
     margin-left: 0; /* override margin*/
     margin-right: 0; /* override margin*/
-    width: span(3 of 12);
+    width: span(3 of 10);
 
     &:nth-child(2n + 1) {
       clear: none;
