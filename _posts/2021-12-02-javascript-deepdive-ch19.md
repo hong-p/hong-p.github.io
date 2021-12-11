@@ -296,12 +296,12 @@ console.log(obj.foo.prototype); // undefined
 ```
   
 
-화살표 함수(`prototype`프로퍼티 없음)
+화살표 함수(`prototype`프로퍼티 없음)  
 ![image](https://user-images.githubusercontent.com/80154058/144734205-81124ffd-e766-451d-aefa-d5ce5e0b0de0.png)
 
   
 
-ES6 메서드(`prototype`프로퍼티 없음)
+ES6 메서드(`prototype`프로퍼티 없음)  
 ![image](https://user-images.githubusercontent.com/80154058/144734227-e9ef3b6b-eb2f-4bb1-a5c4-f4608e17cc61.png)
 
 구분|소유|값|사용 주체|사용 목적
