@@ -157,6 +157,11 @@
   border: 2px dashed #878585;
   border-radius: 10px;
 
+  @include breakpoint(300px) {
+    float: left;
+    width: span(3 of 10);
+  }
+
   @include breakpoint($small) {
     float: left;
     width: span(5 of 10);
