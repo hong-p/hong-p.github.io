@@ -86,6 +86,30 @@ layout: default
           </div>
         </div>
         
+        <!--  related post -->
+        {% unless page.category == null %}
+  {% capture pageCategory %}{{ page.category }}{% endcapture %}
+  {% unless site.categories[pageCategory].size == 1 %}
+    <div class="row related-posts">
+      <h2 class="text-center">More {{ page.category }} Posts!</h2>
+      <div class="medium-12 small-12 columns">
+        {% for post in site.categories[pageCategory] limit:6 %}
+          {% unless post.title == page.title %}
+
+           <h3>
+            <a href="{{ site.url }}{{ site.baseurl }}{{ post.url }}">
+              {{ post.title }}
+            </a>
+           </h3>
+
+          {% endunless %}
+        {% endfor %}
+      </div>
+    </div>
+  {% endunless %}
+{% endunless %}
+        <!--  related post -->
+        
         <!-- footer 광고 시작 -->
         <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2251786384152348"
             crossorigin="anonymous"></script>
