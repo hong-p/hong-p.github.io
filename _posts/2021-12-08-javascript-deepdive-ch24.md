@@ -407,3 +407,5 @@ console.log(counter(increase)); // 2
 console.log(counter(decrease)); // 1
 console.log(counter(decrease)); // 0
 ```
+
+## 5.캡슐화와 정보 은닉
