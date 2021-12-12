@@ -69,7 +69,7 @@ foo();
 
 ## 3.전역에 strict mode를 적용하는 것은 피하자
 전역에 적용한 `strict mode`는 스크립트 단위로 적용된다.
-```javascript
+```html
 <!DOCTYPE html>
 <html>
 <body>
