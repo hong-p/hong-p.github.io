@@ -197,6 +197,10 @@ innerFunc(); // ④ 10
 
 ![image](https://user-images.githubusercontent.com/80154058/145716267-8be51f68-3cea-453e-9c07-ead18b35dda0.png)
 
+클로저에 의해 참조되는 상위 스코프의 변수 (`foo`함수의 `x`변수)를 **자유 변수**(`free variable`)라고 부른다.  
+
+클로저란 함수가 자유 변수에 대해 닫혀있다(`closed`)라는 의미이다. "자유 변수에 묶여있는 함수"라고 할 수 있다.  
+
 ## 4.클로저의 활용
 클로저는 상태`state`를 안전하게 변경하고 유지하기 위해 사용된다.  
 
@@ -357,4 +361,49 @@ console.log(increaser()); // 2
 const decreaser = makeCounter(decrease); // ②
 console.log(decreaser()); // -1
 console.log(decreaser()); // -2
+```
+
+`const increaser = makeCounter(increase); // ①`에서  
+`makeCounter`가 처음 호출되었을 때  
+![image](https://user-images.githubusercontent.com/80154058/145717064-1287ba78-003a-4ea5-ac2d-1ccc5d4750b5.png)
+
+`const decreaser = makeCounter(decrease); // ②`에서  
+`makeCounter`가 두 번째 호출되었을 때  
+![image](https://user-images.githubusercontent.com/80154058/145717080-118b25d1-261d-4b17-bba3-b91816c2a228.png)
+
+즉 `makeCounter`함수를 호출할 때 마다 새로운 독립된 렉시컬 환경을 갖기 때문에 이런 경우 자유 변수 `counter`를 공유하지 못해 카운터의 증감이 연동되지 않는다.  
+
+아래 예제처럼 해야 한다.
+```javascript
+// 함수를 반환하는 고차 함수
+// 이 함수는 카운트 상태를 유지하기 위한 자유 변수 counter를 기억하는 클로저를 반환한다.
+const counter = (function () {
+  // 카운트 상태를 유지하기 위한 자유 변수
+  let counter = 0;
+
+  // 함수를 인수로 전달받는 클로저를 반환
+  return function (aux) {
+    // 인수로 전달 받은 보조 함수에 상태 변경을 위임한다.
+    counter = aux(counter);
+    return counter;
+  };
+}());
+
+// 보조 함수
+function increase(n) {
+  return ++n;
+}
+
+// 보조 함수
+function decrease(n) {
+  return --n;
+}
+
+// 보조 함수를 전달하여 호출
+console.log(counter(increase)); // 1
+console.log(counter(increase)); // 2
+
+// 자유 변수를 공유한다.
+console.log(counter(decrease)); // 1
+console.log(counter(decrease)); // 0
 ```
