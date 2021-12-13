@@ -50,6 +50,14 @@
      Post pagination navigation links
      ========================================================================== */
 
+div.pagination {
+  @include clearfix();
+  float: none;
+  margin-top: 1em;
+  padding-top: 1em;
+  width: 100%;
+}
+
 .pagination {
   @include clearfix();
   float: left;
