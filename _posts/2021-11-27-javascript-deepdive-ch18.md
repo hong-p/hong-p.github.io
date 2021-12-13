@@ -5,6 +5,8 @@ categories:
  - Javascript
 tags:
  - Javascript
+ - Spread operator
+ - Rest parameter
 toc: true
 toc_sticky: true
 last_modified_at: 2021-12-04
