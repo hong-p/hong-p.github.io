@@ -1,7 +1,6 @@
 ---
 title: "[알고리즘-LeetCode] Add Two Numbers"
 excerpt: "알고리즘 문제풀이 java"
-classes: wide
 toc: true
 toc_sticky: true
 
