@@ -6,6 +6,7 @@ categories:
 tags:
  - Javascript
  - Closure
+ - Array.from
 toc: true
 toc_sticky: true
 last_modified_at: 2021-12-12
