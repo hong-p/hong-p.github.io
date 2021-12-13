@@ -409,3 +409,191 @@ console.log(counter(decrease)); // 0
 ```
 
 ## 5.캡슐화와 정보 은닉
+**캡슐화**(`encapsulation`)는 객체의 상태(`state`)를 나타내는 프로퍼티와 프로퍼티를 참조하고 조작할 수 있는 동작인 메서드를 하나로 묶는 것을 말한다.  
+
+**캡슐화**는 객체의 특정 프로퍼티나 메서드를 감출 목적으로 사용하기도 하는데 이를 **정보 은닉**(`information hiding`)이라 한다.  
+
+**정보 은닉**은 외부에 공개할 필요가 없는 구현의 일부를 외부에 공개되지 않도록 감추어 적절치 못한 접근으로부터 객체의 상태가 변경되는 것을 방지해 **정보를 보호**하고, **객체 간의 상호 의존성**, 즉 **결합도**(`coupling`)를 **낮추는 효과**가 있다.  
+
+대부분의 객체지향 프로그래밍 언어는 `public`, `private`, `protected`와 같은 접근 제한자(`access modifier`)를 제공하지만 자바스크립트는 제공하지 않는다. 즉 모든 프로퍼티와 메서드는 `public`이다.  
+
+**1.인스턴스 메서드에서 지역 변수 참조**  
+```javascript
+function Person(name, age) {
+  this.name = name; // public
+  let _age = age;   // private
+
+  // 인스턴스 메서드
+  this.sayHi = function () {
+    console.log(`Hi! My name is ${this.name}. I am ${_age}.`);
+  };
+}
+
+const me = new Person('Lee', 20);
+me.sayHi(); // Hi! My name is Lee. I am 20.
+console.log(me.name); // Lee
+console.log(me._age); // undefined
+
+const you = new Person('Kim', 30);
+you.sayHi(); // Hi! My name is Kim. I am 30.
+console.log(you.name); // Kim
+console.log(you._age); // undefined
+```
+
+**2.프로토타입 메서드에서 지역 변수 참조**  
+프로토타입 메서드 내에서는 지역 변수인 `_age`를 참조할 수 없다.
+```javascript
+function Person(name, age) {
+  this.name = name; // public
+  let _age = age;   // private
+}
+
+// 프로토타입 메서드
+Person.prototype.sayHi = function () {
+  // Person 생성자 함수의 지역 변수 _age를 참조할 수 없다
+  console.log(`Hi! My name is ${this.name}. I am ${_age}.`);
+};
+```
+
+**3.프로토타입 메서드를 클로저로 활용**  
+즉시 실행 함수로 감싸서 그 안에 지역 변수 `_age`를 선언하고 그 안에 `Person`생성자 함수와 프로토타입 메서드를 선언하고 생성자 함수를 반환하도록 한다.  
+
+그렇게되면 즉시 실행 함수는 종료되었지만 반환된 `Person`생성자 함수는 여전히 지역 변수`_age`를 참조할 수 있는 클로저이다.
+```javascript
+const Person = (function () {
+  let _age = 0; // private
+
+  // 생성자 함수
+  function Person(name, age) {
+    this.name = name; // public
+    _age = age;
+  }
+
+  // 프로토타입 메서드
+  Person.prototype.sayHi = function () {
+    console.log(`Hi! My name is ${this.name}. I am ${_age}.`);
+  };
+
+  // 생성자 함수를 반환
+  return Person;
+}());
+
+const me = new Person('Lee', 20);
+me.sayHi(); // Hi! My name is Lee. I am 20.
+console.log(me.name); // Lee
+console.log(me._age); // undefined
+
+const you = new Person('Kim', 30);
+you.sayHi(); // Hi! My name is Kim. I am 30.
+console.log(you.name); // Kim
+console.log(you._age); // undefined
+```
+
+하지만 위 예제도 완벽하진 않다.  
+`Person`생성자 함수가 여러 개의 인스턴스를 생성할 경우 `_age`변수의 상태가 유지되지 않는다.
+```javascript
+const me = new Person('Lee', 20);
+me.sayHi(); // Hi! My name is Lee. I am 20.
+
+const you = new Person('Kim', 30);
+you.sayHi(); // Hi! My name is Kim. I am 30.
+
+// _age 변수 값이 변경된다!
+me.sayHi(); // Hi! My name is Lee. I am 30.
+```
+
+## 6.자주 발생하는 실수
+`for`문을 사용할 때 `for`문 내부에 함수를 선언하는 경우 기대하지 않은 결과가 나타난다.
+```javascript
+var funcs = [];
+
+for (var i = 0; i < 3; i++) {
+  funcs[i] = function () { return i; }; // ①
+}
+
+for (var j = 0; j < funcs.length; j++) {
+  console.log(funcs[j]()); // ②
+}
+```
+`0 1 2`가 출력될 것을 기대하였지만 `3 3 3`이 출력된다.  
+이유는 `var`로 선언된 `i`변수는 전역 변수로 선언되었기 때문에 함수 선언문에 `i`값을 전달하였더라도, 호출하는 시점에는 `i`값이 `3`이기 때문에 `3 3 3`이 출력된다.  
+
+위 예제를 클로저를 사용해 바르게 고치면 아래와 같다.
+```javascript
+var funcs = [];
+
+for (var i = 0; i < 3; i++){
+  funcs[i] = (function (id) { // ①
+    return function () {
+      return id;
+    };
+  }(i));
+}
+
+for (var j = 0; j < funcs.length; j++) {
+  console.log(funcs[j]());
+}
+```
+`for`문 내부에 함수를 선언할 때 즉시 실행 함수로 감싸고 `i`값을 전달해 주도록 수정하였다.  
+이렇게 하면 새로운 함수 레벨 스코프가 반복문을 반복하면서 계속 생겨 각각의 스코프에 `i`값이 `id` 매개변수에 저장되게 된다.  
+
+즉 `id`는 즉시 실행 함수가 반환한 중첩 함수에 묶여있는 자유 변수가 되어 그 값이 유지된다.  
+
+위 예제 보다 더욱 간단하게 하는 방법은 ES6의 `let`키워드를 사용하는 것이다.
+```javascript
+const funcs = [];
+
+for (let i = 0; i < 3; i++) {
+  funcs[i] = function () { return i; };
+}
+
+for (let i = 0; i < funcs.length; i++) {
+  console.log(funcs[i]()); // 0 1 2
+```
+`let` 키워드는 블록 레벨 스코프를 따르기 때문에 `for`문이 반복될 때 마다 새로운 렉시컬 환경이 생성된다.
+![image](https://user-images.githubusercontent.com/80154058/145822703-2df5655e-3803-4aa5-80f8-54cc91246cd1.png)
+
+※ 반복문의 코드 블록 내부에서 함수를 정의할 때에만 의미가 있다. 반복문의 코드 블록 내부에 함수 정의가 없는 경우 참조할 대상이 없기 때문에 가비지 컬렉션의 대상이 된다. (따라서 함수 정의가 없는 경우 그냥 `var`를 사용하는 것이 메모리 관점에서는 좋으려나?)  
+
+함수형 프로그래밍 기법인 고차 함수를 사용하는 방법도 있다.
+```javascript
+// 요소가 3개인 배열을 생성하고 배열의 인덱스를 반환하는 함수를 요소로 추가한다.
+// 배열의 요소로 추가된 함수들은 모두 클로저다.
+const funcs = Array.from(new Array(3), (_, i) => () => i); // (3) [ƒ, ƒ, ƒ]
+
+// 배열의 요소로 추가된 함수 들을 순차적으로 호출한다.
+funcs.forEach(f => console.log(f())); // 0 1 2
+```
+[MDN Array.from](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/from)을 참고하자  
+
+![image](https://user-images.githubusercontent.com/80154058/145823600-72cd6e18-51aa-4e3d-bf24-831e875719c9.png)
+
+`Array.from`메서드의 첫 번째 파라미터에는 `iterable` 혹은 유사배열이 오고, 두 번째 파라미터에는 `callback`함수를 넣어준다.  
+`callback`함수를 통해 배열을 하나씩 순회하면서 반환 값으로 새로운 배열을 반환한다.  
+`callback`함수의 첫 번째 파라미터는 `element`값, 두 번째 파라미터는 `index`이다.
+```javascript
+Array.from([1,2,3], (v,i)=>v*2)
+// [2, 4, 6]
+
+// 'foo'는 유사배열
+Array.from('foo', (v,i)=>v)
+// ['f', 'o', 'o']
+
+Array.from('foo', (v,i)=>v+i)
+// ['f0', 'o1', 'o2']
+
+// 함수를 반환
+Array.from('foo', (v,i)=>()=>v)
+// [ƒ, ƒ, ƒ]
+```
+
+```javascript
+Array.from(new Array(3), (_, i) => () => i)
+```
+따라서 위 예제 `_`는 `element`이고 `i`는 `index`이고, 각 배열을 순회하면서 `()=>i` 함수를 할당한 것이고, `i`값은 클로저로 인해 `0`,`1`,`2`값이 저장되어 있는 것이다.  
+
+결국 아래와 같이 배열의 각 요소에 할당된 함수를 호출하면 `0 1 2`가 출력되는 것이다.
+```javascript
+// 배열의 요소로 추가된 함수 들을 순차적으로 호출한다.
+funcs.forEach(f => console.log(f())); // 0 1 2
+```
