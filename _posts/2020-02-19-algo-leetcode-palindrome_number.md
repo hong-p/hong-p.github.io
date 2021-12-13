@@ -1,7 +1,6 @@
 ---
 title: "[알고리즘-LeetCode] Palindrome Number"
 excerpt: "알고리즘 문제풀이 c++"
-classes: wide
 toc: true
 toc_sticky: true
 
