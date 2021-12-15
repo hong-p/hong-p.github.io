@@ -114,8 +114,8 @@ me.sayHi(); // Hi! My name is Lee
 Person.sayHello(); // Hello!
 ```
 
-생성자 함수와 클래스를 비교해 보면
-<<이미지 추가>>
+생성자 함수와 클래스를 비교해 보면  
+![image](https://user-images.githubusercontent.com/80154058/146196443-6180771f-6296-4ec6-8d21-cb8cf8c44393.png)
 
 ## 3.클래스 호이스팅
 클래스는 함수로 평가된다.  
@@ -189,7 +189,7 @@ const you = new MyClass(); // ReferenceError: MyClass is not defined
 
 > ※ 클래스 정의에 대한 새로운 제안  
 > -ECMAScript 사양에 따르면 인스턴스 프로퍼티는 반드시 `constructor`내부에서 정의해야 한다.  
-> -하지만 클래스 몸체에 메서드뿐만이 아니라 프로퍼티도 정의할 수 있게 새로운 표준 사양이 제안되어 있다.  
+> -하지만 클래스 몸체에 메서드뿐만이 아니라 **프로퍼티도 정의할 수 있게 새로운 표준 사양이 제안되어 있다.**  
 > -최신 모던 브라우저에는 이미 반영되어 사용이 가능하다.
 
 
@@ -335,8 +335,57 @@ me.sayHi(); // Hi! My name is Lee
 ```
 
 ### 5.3 정적 메서드
+정적(`static`)메서드는 인스턴스를 생성하지 않아도 호출할 수 있는 메서드를 말한다.  
 
+생성자 함수의 경우 다음과 같이 명시적으로 생성자 함수에 메서드를 추가해 정적 메서드를 생성한다. 
+```javascript
+// 생성자 함수
+function Person(name) {
+  this.name = name;
+}
 
+// 정적 메서드
+Person.sayHi = function () {
+  console.log('Hi!');
+};
+
+// 정적 메서드 호출
+Person.sayHi(); // Hi!
+```
+
+클래스에서는 `static`키워드를 붙이면 정적 메서드(클래스 메서드)가 된다.
+```javascript
+class Person {
+  // 생성자
+  constructor(name) {
+    // 인스턴스 생성 및 초기화
+    this.name = name;
+  }
+
+  // 정적 메서드
+  static sayHi() {
+    console.log('Hi!');
+  }
+}
+```
+
+정적 메서드는 클래스에 바인딩된 메서드가 된다.  
+클래스는 함수 객체로 평가되므로 자신의 프로퍼티/메서드를 소유할 수 있다.  
+
+클래스는 클래스 정의(클래스 선언문, 클래스 표현식)가 평가되는 시점에 함수 객체가 되므로 인스턴스와 달리 별다른 생성 과정이 필요 없다.
+
+```javascript
+// 정적 메서드는 클래스로 호출한다.
+// 정적 메서드는 인스턴스 없이도 호출할 수 있다.
+Person.sayHi(); // Hi!
+```
+
+정적 메서드는 인스턴스로 호출할 수 없다.(정적 메서드가 바인딩된 클래스는 인스턴스의 프로토타입 체인상에 존재하지 않는다.)  
+```javascript
+// 인스턴스 생성
+const me = new Person('Lee');
+me.sayHi(); // TypeError: me.sayHi is not a function
+```
 
 ### 5.4 정적 메서드와 프로토타입 메서드의 차이
 
