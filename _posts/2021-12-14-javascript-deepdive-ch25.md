@@ -389,15 +389,102 @@ me.sayHi(); // TypeError: me.sayHi is not a function
 
 ### 5.4 정적 메서드와 프로토타입 메서드의 차이
 
+1. 정적 메서드와 프로토타입 메서드는 자신이 속해있는 프로토타입 체인이 다르다.
+2. 정적 메서드는 클래스로 호출하고 프로토타입 메서드는 인스턴스로 호출한다.
+3. 정적 메서드는 인스턴스 프로퍼티를 참조할 수 없지만 프로토타입 메서드는 인스턴스 프로퍼티를 참조할 수 있다.  
+
+정적 메서드 예제  
+```javascript
+class Square {
+  // 정적 메서드
+  static area(width, height) {
+    return width * height;
+  }
+}
+
+console.log(Square.area(10, 10)); // 100
+```
+
+프로토타입 메서드 예제  
+```javascript
+class Square {
+  constructor(width, height) {
+    this.width = width;
+    this.height = height;
+  }
+
+  // 프로토타입 메서드
+  area() {
+    return this.width * this.height;
+  }
+}
+
+const square = new Square(10, 10);
+console.log(square.area()); // 100
+```
+
+> ※ 표준 빌트인 객체의 정적 메서드
+> ```javascript
+> // 표준 빌트인 객체의 정적 메서드
+> Math.max(1, 2, 3);          // -> 3
+> Number.isNaN(NaN);          // -> true
+> JSON.stringify({ a: 1 });   // -> "{"a":1}"
+> Object.is({}, {});          // -> false
+> Reflect.has({ a: 1 }, 'a'); // -> true
+> ```
+
 ### 5.5 클래스에서 정의한 메서드의 특징
+- `function`키워드를 생략한 메서드 축약 표현을 사용한다.
+- 객체 리터럴과는 다르게 클래스에 메서드를 정의할 때는 콤마가 필요 없다.
+- 암묵적으로 `strict mode`로 실행된다.
+- `for...in`문이나 `Object.keys`메서드 등으로 열거할 수 없다.(`[[Enumerable]]`값이 `false`다.)
+- 내부 메서드 `[[Construct]]`를 갖지 않는 `non-constructor`다.(`new`연산자와 함께 호출할 수 없다.)
 
 
 ## 6.클래스의 인스턴스 생성 과정
+**1.인스턴스 생성과** `this`**바인딩**  
+- `new`연산자와 함께 클래스를 호출하면 암묵적으로 빈 객체(인스턴스)가 생성된다.
+- 빈 객체는 `this`에 바인딩된다.
 
+**2.인스턴스 초기화**  
+- `constructor` 내부의 코드가 실행되며 `this`에 바인딩되어 있는 인스턴스를 초기화한다.
+- 인스턴스에 프로퍼티 추가하고 초기화한다.
+
+**3.인스턴스 반환**  
+- 클래스의 모든 처리가 끝나면 완성된 인스턴스가 바인딩된 `this`가 암묵적으로 반환된다.
+```javascript
+class Person {
+  // 생성자
+  constructor(name) {
+    // 1. 암묵적으로 인스턴스가 생성되고 this에 바인딩된다.
+    console.log(this); // Person {}
+    console.log(Object.getPrototypeOf(this) === Person.prototype); // true
+
+    // 2. this에 바인딩되어 있는 인스턴스를 초기화한다.
+    this.name = name;
+
+    // 3. 완성된 인스턴스가 바인딩된 this가 암묵적으로 반환된다.
+  }
+}
+```
 
 ## 7.프로퍼티
-
 ### 7.1 인스턴스 프로퍼티
+`constructor` 내부의 `this`는 앞서 봤듯이 클래스가 생성한 빈 객체(인스턴스)가 바인딩 되어있다.  
+
+따라서 `this.name = name;`코드가 실행되면 `this`에 인스턴스 프로퍼티를 추가하고 초기화한다.  
+
+```javascript
+class Person {
+  constructor(name) {
+    // 인스턴스 프로퍼티
+    this.name = name;
+  }
+}
+
+const me = new Person('Lee');
+console.log(me); // Person {name: "Lee"}
+```
 
 ### 7.2 접근자 프로퍼티
 
