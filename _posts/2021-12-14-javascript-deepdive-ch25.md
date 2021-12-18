@@ -487,10 +487,191 @@ console.log(me); // Person {name: "Lee"}
 ```
 
 ### 7.2 접근자 프로퍼티
+[16.3.2절 접근자 프로퍼티](https://hong-p.github.io/javascript/javascript-deepdive-ch16/#32-%EC%A0%91%EA%B7%BC%EC%9E%90-%ED%94%84%EB%A1%9C%ED%8D%BC%ED%8B%B0) 에서 보았듯이 접근자 프로퍼티는 자체적으로는 값(`[[Value]]`내부슬롯)을 갖지 않고 다른 데이터 프로퍼티의 값을 읽거나 저장할 때 사용하는 **접근자 함수**(아래 예제에서 `fullName` 프로퍼티)로 구성된 프로퍼티다.  
+
+- 접근자 프로퍼티는 클래스에서도 사용할 수 있다.
+- 접근자 프로퍼티는 자체적으로는 값을 갖지 않고 읽거나 저장할 때 사용하는 접근자 함수(`getter`, `setter`)로 구성되어 있다.
+- `getter`는 메서드 이름 앞에 `get`키워드를 사용해 정의한다.
+- `setter`는 메서드 이름 앞에 `set`키워드를 사용해 정의한다.
+- `getter`와 `setter` 이름은 인스턴스 프로퍼티처럼 사용된다.(ex `me.fullName = 'Heegun Lee';`, `console.log(me.fullName);`)
+- `getter`는 무언가를 취들할 때 사용하므로 반드시 `return`이 있어야 한다.
+- `setter`는 무언가를 프로퍼티에 할당할 때 사용하므로 반드시 매개변수가 있어야한다.
+- 접근자 프로퍼티는 인스턴스의 프로로타입이 아니라 **프로토타입의 프로퍼티**가 된다.
+
+
+```javascript
+class Person {
+  constructor(firstName, lastName) {
+    this.firstName = firstName;
+    this.lastName = lastName;
+  }
+
+  // fullName은 접근자 함수로 구성된 접근자 프로퍼티다.
+  // getter 함수
+  get fullName() {
+    return `${this.firstName} ${this.lastName}`;
+  }
+
+  // setter 함수
+  set fullName(name) {
+    [this.firstName, this.lastName] = name.split(' ');
+  }
+}
+
+const me = new Person('Ungmo', 'Lee');
+
+// 데이터 프로퍼티를 통한 프로퍼티 값의 참조.
+console.log(`${me.firstName} ${me.lastName}`); // Ungmo Lee
+
+// 접근자 프로퍼티를 통한 프로퍼티 값의 저장
+// 접근자 프로퍼티 fullName에 값을 저장하면 setter 함수가 호출된다.
+me.fullName = 'Heegun Lee';
+console.log(me); // {firstName: "Heegun", lastName: "Lee"}
+
+// 접근자 프로퍼티를 통한 프로퍼티 값의 참조
+// 접근자 프로퍼티 fullName에 접근하면 getter 함수가 호출된다.
+console.log(me.fullName); // Heegun Lee
+
+// fullName은 접근자 프로퍼티다.
+// 접근자 프로퍼티는 get, set, enumerable, configurable 프로퍼티 어트리뷰트를 갖는다.
+console.log(Object.getOwnPropertyDescriptor(Person.prototype, 'fullName'));
+// {get: ƒ, set: ƒ, enumerable: false, configurable: true}
+```
+
 
 ### 7.3 클래스 필드 정의 제안
+자바스크립트의 클래스 몸체에는 메서드만 선언할 수 있다. 클래스 몸체에 클래스 필드를 선언하면 문법 에러(`SyntaxError`)가 발생한다.  
+
+하지만 최신브라우저(Chrome72이상) 또는 Node.js(버전 12이상)에서는 정상 동작한다.  
+그 이유는 자바스크립트에서도 인스턴스 프로퍼티를 마치 클래스 기반 객체지향 언어의 클래스 필드처럼 정의할 수 있는 새로운 표준 사양인 "[Class field declarations](https://github.com/tc39/proposal-class-fields)"가 TC39프로세스의 stage 3(candidate)에 제안되어 있기 때문이다.  
+
+> ※ [TC39프로세스](https://tc39.es/process-document/)  
+> ECMA-262 사양에 새로운 표준 사양을 추가하기 위해 공식적으로 명문화해 놓은 과정이다.  
+> 0단계 부터 4단계까지 총 5단계로 구성되어 있다.  
+> stage 0:starwman -> stage 1: proposal -> stage 2: draft -> stage 3: candidate -> stage 4: finished  
+> stage 3(candidate) 까지 승급한 제안은 심각한 문제가 없는 한 변경되지 않고 대부분 stage 4로 승급되고,  
+> stage 4(finished)까지 승급한 제안은 큰 이변이 없는 이상 차기 ECMAScript 버전에 포함된다.
+
+```javascript
+class Person {
+  // 클래스 필드 정의
+  name = 'Lee';
+}
+
+const me = new Person();
+console.log(me); // Person {name: "Lee"}
+```
+- 최신 브라우저(chrome 72이상), Node.js(버전 12이상)에서만 사용가능하다.
+- 클래스 필드를 정의하는 경우 `this`에 클래스 필드를 바인딩해서는 안된다.
+```javascript
+class Person {
+  // this에 클래스 필드를 바인딩해서는 안된다.
+  this.name = ''; // SyntaxError: Unexpected token '.'
+}
+```
+- 참조하는 경우 `this`를 반드시 사용해야 한다.
+```javascript
+class Person {
+  // 클래스 필드
+  name = 'Lee';
+
+  constructor() {
+    // 참조할때는 this를 반드시 사용해야 한다.
+    console.log(name); // ReferenceError: name is not defined
+  }
+}
+
+new Person();
+```
+- 초기값을 할당하지 않으면 `undefined`를 갖는다.
+- 초기화는 `constructor`에서 해야 한다.
+```javascript
+class Person {
+  name;
+
+  constructor(name) {
+    // 초기화할 때는 constructor에서 해야한다.
+    // 클래스 필드 초기화.
+    this.name = name;
+  }
+}
+
+const me = new Person('Lee');
+console.log(me); // Person {name: "Lee"}
+```
+- 함수는 일급 객체이므로 함수를 클래스 필드에 할당할 수 있다. 즉 클래스 필드를 통해 메서드를 정의할 수도 있다.(이경우 프로토타입 메서드가 아닌 **인스턴스 메서드**가 된다. **권장하지 않음**)
+```javascript
+class Person {
+  // 클래스 필드에 문자열을 할당
+  name = 'Lee';
+
+  // 클래스 필드에 함수를 할당
+  getName = function () {
+    return this.name;
+  }
+  // 화살표 함수로 정의할 수도 있다.
+  // getName = () => this.name;
+}
+
+const me = new Person();
+console.log(me); // Person {name: "Lee", getName: ƒ}
+console.log(me.getName()); // Lee
+```
+
 
 ### 7.4 private 필드 정의 제안
+`private`필드도 TC39 프로세스의 stage 3(candidate)로 제안되어있다.  
+최신브라우저(chrome 74이상)와 Node.js(버전 12이상)에 이미 구현되어있다.  
+
+- `private`필드는 이름 앞에 `#`을 붙여준다. 참조할 때도 `#`을 붙여주어야 한다.
+```javascript
+class Person {
+  // private 필드 정의
+  #name = '';
+
+  constructor(name) {
+    // private 필드 참조
+    this.#name = name;
+  }
+}
+
+const me = new Person('Lee');
+
+// private 필드 #name은 클래스 외부에서 참조할 수 없다.
+console.log(me.#name);
+// SyntaxError: Private field '#name' must be declared in an enclosing class
+```
+- `private`필드에 직접 접근할 수 있는 방법은 없다. 다만 접근자 프로퍼티를 통해 간접적으로 가능하다.
+```javascript
+class Person {
+  // private 필드 정의
+  #name = '';
+
+  constructor(name) {
+    this.#name = name;
+  }
+
+  // name은 접근자 프로퍼티다.
+  get name() {
+    // private 필드를 참조하여 trim한 다음 반환한다.
+    return this.#name.trim();
+  }
+}
+
+const me = new Person(' Lee ');
+console.log(me.name); // Lee
+```
+- `private` 필드는 반드시 클래스 몸체에 정의해야 한다. `constructor`에 정의하면 에러가 발생한다.
+```javascript
+class Person {
+  constructor(name) {
+    // private 필드는 클래스 몸체에서 정의해야 한다.
+    this.#name = name;
+    // SyntaxError: Private field '#name' must be declared in an enclosing class
+  }
+}
+```
+
 
 ### 7.5 static 필드 정의 제안
 
