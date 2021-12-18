@@ -563,6 +563,7 @@ console.log(me); // Person {name: "Lee"}
 ```
 - 최신 브라우저(chrome 72이상), Node.js(버전 12이상)에서만 사용가능하다.
 - 클래스 필드를 정의하는 경우 `this`에 클래스 필드를 바인딩해서는 안된다.
+
 ```javascript
 class Person {
   // this에 클래스 필드를 바인딩해서는 안된다.
@@ -570,6 +571,7 @@ class Person {
 }
 ```
 - 참조하는 경우 `this`를 반드시 사용해야 한다.
+
 ```javascript
 class Person {
   // 클래스 필드
@@ -620,7 +622,7 @@ console.log(me.getName()); // Lee
 
 
 ### 7.4 private 필드 정의 제안
-`private`필드도 TC39 프로세스의 stage 3(candidate)로 제안되어있다.  
+`private`필드도 TC39 프로세스의 stage 3(candidate)로 제안되어있다.([class-private-fields](https://github.com/tc39/proposal-class-fields#private-fields))  
 최신브라우저(chrome 74이상)와 Node.js(버전 12이상)에 이미 구현되어있다.  
 
 - `private`필드는 이름 앞에 `#`을 붙여준다. 참조할 때도 `#`을 붙여주어야 한다.
@@ -674,7 +676,26 @@ class Person {
 
 
 ### 7.5 static 필드 정의 제안
+`static`키워드를 사용하여 `static public field`, `static private field`, `static private 메서드`를 정의할 수 있는 새로운 표준 사양인 "Static class features"가 TC39 프로세스의 stage 3(candidate)에 제안되어 있다.([static-class-features](https://github.com/tc39/proposal-static-class-features))  
+최신 브라우저(chrome 72이상)와 Node.js(버전 12 이상)에 이미 구현되어 있다.  
 
+```javascript
+class MyMath {
+  // static public 필드 정의
+  static PI = 22 / 7;
+
+  // static private 필드 정의
+  static #num = 10;
+
+  // static 메서드
+  static increment() {
+    return ++MyMath.#num;
+  }
+}
+
+console.log(MyMath.PI); // 3.142857142857143
+console.log(MyMath.increment()); // 11
+```
 
 ## 8.상속에 의한 클래스 확장
 
