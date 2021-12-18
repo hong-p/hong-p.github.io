@@ -587,6 +587,7 @@ new Person();
 ```
 - 초기값을 할당하지 않으면 `undefined`를 갖는다.
 - 초기화는 `constructor`에서 해야 한다.
+
 ```javascript
 class Person {
   name;
@@ -602,6 +603,7 @@ const me = new Person('Lee');
 console.log(me); // Person {name: "Lee"}
 ```
 - 함수는 일급 객체이므로 함수를 클래스 필드에 할당할 수 있다. 즉 클래스 필드를 통해 메서드를 정의할 수도 있다.(이경우 프로토타입 메서드가 아닌 **인스턴스 메서드**가 된다. **권장하지 않음**)
+
 ```javascript
 class Person {
   // 클래스 필드에 문자열을 할당
