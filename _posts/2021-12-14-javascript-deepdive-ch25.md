@@ -628,6 +628,7 @@ console.log(me.getName()); // Lee
 최신브라우저(chrome 74이상)와 Node.js(버전 12이상)에 이미 구현되어있다.  
 
 - `private`필드는 이름 앞에 `#`을 붙여준다. 참조할 때도 `#`을 붙여주어야 한다.
+
 ```javascript
 class Person {
   // private 필드 정의
@@ -646,6 +647,7 @@ console.log(me.#name);
 // SyntaxError: Private field '#name' must be declared in an enclosing class
 ```
 - `private`필드에 직접 접근할 수 있는 방법은 없다. 다만 접근자 프로퍼티를 통해 간접적으로 가능하다.
+
 ```javascript
 class Person {
   // private 필드 정의
@@ -666,6 +668,7 @@ const me = new Person(' Lee ');
 console.log(me.name); // Lee
 ```
 - `private` 필드는 반드시 클래스 몸체에 정의해야 한다. `constructor`에 정의하면 에러가 발생한다.
+
 ```javascript
 class Person {
   constructor(name) {
