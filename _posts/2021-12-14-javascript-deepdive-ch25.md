@@ -703,16 +703,183 @@ console.log(MyMath.increment()); // 11
 ```
 
 ## 8.상속에 의한 클래스 확장
-
 ### 8.1 클래스 상속과 생성자 함수 상속
+상속에 의한 클래스 확장은 프로토타입 기반 상속과는 다른 개념이다.  
+프로토타입 기반 상속|상속에 의한 클래스 확장
+:---|:---
+프로토타입 체인을 통해 다른 객체의 자산을 상속받는 개념 | 기존 클래스를 상속받아 새로운 클래스를 확장(`extends`)하여 정의하는 것
+
+![image](https://user-images.githubusercontent.com/22947274/146665979-364ce758-7330-4391-8b6b-c7372e92f9e4.png)
+
+클래스는 상속을 통해 기존 클래스를 확장할 수 있는 문법이 기본적으로 제공되지만 생성자 함수는 그렇지 않다.  
+
+```javascript
+class Animal {
+  constructor(age, weight) {
+    this.age = age;
+    this.weight = weight;
+  }
+
+  eat() { return 'eat'; }
+
+  move() { return 'move'; }
+}
+
+// 상속을 통해 Animal 클래스를 확장한 Bird 클래스
+class Bird extends Animal {
+  fly() { return 'fly'; }
+}
+
+const bird = new Bird(1, 5);
+
+console.log(bird); // Bird {age: 1, weight: 5}
+console.log(bird instanceof Bird); // true
+console.log(bird instanceof Animal); // true
+
+console.log(bird.eat());  // eat
+console.log(bird.move()); // move
+console.log(bird.fly());  // fly
+```
+
+상속에 의해 확장된 클래스 `Bird`를 통해 생성된 인스턴스의 프로토타입 체인은 아래와 같다.  
+![image](https://user-images.githubusercontent.com/22947274/146666004-8fbf22ba-c7f7-4ffc-b0a5-d52771a91bbe.png)
 
 ### 8.2 extends 키워드
+상속을 통해 클래스를 확장하려면 `extends`키워드를 사용하여 상속받을 클래스를 정의한다.  
+```javascript
+// 수퍼(베이스/부모)클래스
+class Base {}
+
+// 서브(파생/자식)클래스
+class Derived extends Base {}
+```
+
+수퍼클래스와 서브클래스는 인스턴스의 프로토타입 체인뿐 아니라 클래스 간의 프로토타입 체인도 생성한다. 이를 통해 **프로토타입 메서드**, **정적 메서드** 모두 **상속이 가능**하다.
 
 ### 8.2 동적 상속
+`extends`키워드는 클래스뿐 아니라 **생성자 함수를 상속받아 클래스를 확장**할 수도 있다.(`extends`키워드 앞에는 반드시 클래스가 와야한다.)  
+```javascript
+// 생성자 함수
+function Base(a) {
+  this.a = a;
+}
 
-### 8.4 서브클래스의 constructor
+// 생성자 함수를 상속받는 서브클래스
+class Derived extends Base {}
+
+const derived = new Derived(1);
+console.log(derived); // Derived {a: 1}
+```
+또한 `extends`키워드 다음에는 클래스뿐만 아니라 `[[Construct]]`내부 메서드를 갖는 함수 객체로 평가될수 있는 **모든 표현식**을 사용할 수 있다.(이를 통해 동적으로 상속가능)  
+```javascript
+function Base1() {}
+
+class Base2 {}
+
+let condition = true;
+
+// 조건에 따라 동적으로 상속 대상을 결정하는 서브클래스
+class Derived extends (condition ? Base1 : Base2) {}
+
+const derived = new Derived();
+console.log(derived); // Derived {}
+
+console.log(derived instanceof Base1); // true
+console.log(derived instanceof Base2); // false
+```
+
+### 8.4 서브클래스의 constructor 
+서브클래스에서 `constructor`를 생략하면 암묵적으로 정의된다.  
+```javascript
+// 수퍼클래스
+class Base {}
+
+// 서브클래스
+class Derived extends Base {}
+```
+위와 같이 생략한 경우 아래와 같이 암묵적으로 생성된다.
+```javascript
+// 수퍼클래스
+class Base {
+  constructor() {}
+}
+
+// 서브클래스
+class Derived extends Base {
+  constructor() { super(); }
+}
+
+const derived = new Derived();
+console.log(derived); // Derived {}
+```
 
 ### 8.5 super 키워드
+`super`키워드는 함수처럼 호출할 수도 있고 `this`와 같이 식별자처럼 참조할 수 있는 특수한 키워드다.  
+- `super`를 호출하면 수퍼클래스의 `constructor`를 호출한다.
+- `super`를 참조하면 수퍼클래스의 메서드를 호출할 수 있다.
+
+1.`super` **호출**
+`super`를 호출하면 수퍼클래스의 `constuctor`를 호출한다.  
+수퍼클래스의 `constructor`내부에서 추가한 프로퍼티를 그대로 갖는 인스턴스를 생성한다면 서브클래스의 `constructor`를 생략할 수 있다. 이때 `new`연산자와 함께 서브클래스를 호출하면서 전달한 인수는 모두 서브클래스에 암무적으로 정의된 `cosntructor`의 `super`호출을 통해 수퍼클래스의 `constructor`에 전달된다.  
+```javascript
+// 수퍼클래스
+class Base {
+  constructor(a, b) {
+    this.a = a;
+    this.b = b;
+  }
+}
+
+// 서브클래스
+class Derived extends Base {
+  // 다음과 같이 암묵적으로 constructor가 정의된다.
+  // constructor(...args) { super(...args); }
+}
+
+const derived = new Derived(1, 2);
+console.log(derived); // Derived {a: 1, b: 2}
+```
+
+1. 서브클래스에서 `constructor`를 생략하지 않는 경우 서브클래스의 `constructor`에서는 반드시 `super`를 호출해야 한다.
+```javascript
+class Base {}
+
+class Derived extends Base {
+  constructor() {
+    // ReferenceError: Must call super constructor in derived class before accessing 'this' or returning from derived constructor
+    console.log('constructor call');
+  }
+}
+
+const derived = new Derived();
+```
+2. 서브클래스의 `constructor`에서 `super`를 호출하기 전에는 `this`를 참조할 수 없다.(인스턴스 생성과 `this`바인딩은 수퍼클래스에서 하기 때문이다.)
+```javascript
+class Base {}
+
+class Derived extends Base {
+  constructor() {
+    // ReferenceError: Must call super constructor in derived class before accessing 'this' or returning from derived constructor
+    this.a = 1;
+    super();
+  }
+}
+
+const derived = new Derived(1);
+```
+3. `super`는 반드시 서브클래스의 `constructor`에서만 호출한다. 서브클래스가 아닌 클래스의 `consturcotr`나 함수에서 `super`를 호출하면 에러가 발생한다.
+```javascript
+class Base {
+  constructor() {
+    super(); // SyntaxError: 'super' keyword unexpected here
+  }
+}
+
+function Foo() {
+  super(); // SyntaxError: 'super' keyword unexpected here
+}
+```
+
 
 ### 8.6 상속 클래스의 인스턴스 생성 과정
 
