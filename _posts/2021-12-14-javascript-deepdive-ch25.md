@@ -818,7 +818,9 @@ console.log(derived); // Derived {}
 - `super`를 호출하면 수퍼클래스의 `constructor`를 호출한다.
 - `super`를 참조하면 수퍼클래스의 메서드를 호출할 수 있다.
 
-1.`super` **호출**
+<br>
+
+**1.**`super` **호출**  
 `super`를 호출하면 수퍼클래스의 `constuctor`를 호출한다.  
 수퍼클래스의 `constructor`내부에서 추가한 프로퍼티를 그대로 갖는 인스턴스를 생성한다면 서브클래스의 `constructor`를 생략할 수 있다. 이때 `new`연산자와 함께 서브클래스를 호출하면서 전달한 인수는 모두 서브클래스에 암무적으로 정의된 `cosntructor`의 `super`호출을 통해 수퍼클래스의 `constructor`에 전달된다.  
 ```javascript
@@ -840,7 +842,8 @@ const derived = new Derived(1, 2);
 console.log(derived); // Derived {a: 1, b: 2}
 ```
 
-1. 서브클래스에서 `constructor`를 생략하지 않는 경우 서브클래스의 `constructor`에서는 반드시 `super`를 호출해야 한다.
+- 서브클래스에서 `constructor`를 생략하지 않는 경우 서브클래스의 `constructor`에서는 반드시 `super`를 호출해야 한다.
+  
 ```javascript
 class Base {}
 
@@ -853,7 +856,8 @@ class Derived extends Base {
 
 const derived = new Derived();
 ```
-2. 서브클래스의 `constructor`에서 `super`를 호출하기 전에는 `this`를 참조할 수 없다.(인스턴스 생성과 `this`바인딩은 수퍼클래스에서 하기 때문이다.)
+- 서브클래스의 `constructor`에서 `super`를 호출하기 전에는 `this`를 참조할 수 없다.(인스턴스 생성과 `this`바인딩은 수퍼클래스에서 하기 때문이다.)
+
 ```javascript
 class Base {}
 
@@ -867,7 +871,8 @@ class Derived extends Base {
 
 const derived = new Derived(1);
 ```
-3. `super`는 반드시 서브클래스의 `constructor`에서만 호출한다. 서브클래스가 아닌 클래스의 `consturcotr`나 함수에서 `super`를 호출하면 에러가 발생한다.
+- `super`는 반드시 서브클래스의 `constructor`에서만 호출한다. 서브클래스가 아닌 클래스의 `consturcotr`나 함수에서 `super`를 호출하면 에러가 발생한다.
+
 ```javascript
 class Base {
   constructor() {
@@ -880,8 +885,333 @@ function Foo() {
 }
 ```
 
+<br>
+
+**2.**`super`**참조**  
+메서드 내에서 `super`를 참조하면 수퍼클래스의 메서드를 호출할 수 있다.  
+
+- 서브클래스의 프로토타입 메서드 내에서 `super.sayHi`는 수퍼클래스의 프로토타입 메서드 `sayHi`를 가리킨다.
+
+```javascript
+// 수퍼클래스
+class Base {
+  constructor(name) {
+    this.name = name;
+  }
+
+  sayHi() {
+    return `Hi! ${this.name}`;
+  }
+}
+
+// 서브클래스
+class Derived extends Base {
+  sayHi() {
+    // super.sayHi는 수퍼클래스의 프로토타입 메서드를 가리킨다.
+    return `${super.sayHi()}. how are you doing?`;
+  }
+}
+
+const derived = new Derived('Lee');
+console.log(derived.sayHi()); // Hi! Lee. how are you doing?
+```
+`super.syaHi`는 `Base.prototype.sayHi`를 가리킨다.  
+즉 `super`는 **자신을 참조하고 있는 메서드가 바인딩 되어있는 객체의 프로토타입**을 가리킨다.(`Derived`의 `sayHi` 메서드가 바인딩 되어있는 객체 `derived`의 프로토타입인 `Base.prototype`을 가리킨다.)  
+
+`super`참조의 동작은 `Derived`클래스의 `sayHi`메서드의 `[[HomeObject]]`내부 슬롯을 통해 자신을 바인딩하는 객체를 알수있다.  
+자신을 바인딩하는 객체를 알면 프로토타입 체인을 통해 `super`를 참조할 수 있게된다.  
+
+주의할 점은 ES6의 메서드 축약 표현으로 정의된 함수만 `[[HomeObject]]`를 갖는다는 것이다.
+```javascript
+const obj = {
+  // foo는 ES6의 메서드 축약 표현으로 정의한 메서드다. 따라서 [[HomeObject]]를 갖는다.
+  foo() {},
+
+  // bar는 ES6의 메서드 축약 표현으로 정의한 메서드가 아니라 일반 함수다.
+  // 따라서 [[HomeObject]]를 갖지 않는다.
+  bar: function () {}
+};
+```
+`super`참조는 객체 리터럴에서도 할수 있다.(단, ES6의 메서드 축약표현으로 정의된 함수만 가능하다.)
+
+```javascript
+const base = {
+  name: 'Lee',
+  sayHi() {
+    return `Hi! ${this.name}`;
+  }
+};
+
+const derived = {
+  __proto__: base,
+  // ES6 메서드 축약 표현으로 정의한 메서드다. 따라서 [[HomeObject]]를 갖는다.
+  sayHi() {
+    return `${super.sayHi()}. how are you doing?`;
+  }
+};
+
+console.log(derived.sayHi()); // Hi! Lee. how are you doing?
+```
+
+- 서브클래스의 정적 메서드 내에서 `super.sayHi`는 수퍼클래스의 정적 메서드 `sayHi`를 가리킨다.
+
+```javascript
+// 수퍼클래스
+class Base {
+  static sayHi() {
+    return 'Hi!';
+  }
+}
+
+// 서브클래스
+class Derived extends Base {
+  static sayHi() {
+    // super.sayHi는 수퍼클래스의 정적 메서드를 가리킨다.
+    return `${super.sayHi()} how are you doing?`;
+  }
+}
+
+console.log(Derived.sayHi()); // Hi! how are you doing?
+```
 
 ### 8.6 상속 클래스의 인스턴스 생성 과정
+상속 관계에 있는 두 클래스가 어떻게 협력하며 인스턴스를 생성하는지 살펴보자.
+
+```javascript
+// 수퍼클래스
+class Rectangle {
+  constructor(width, height) {
+    this.width = width;
+    this.height = height;
+  }
+
+  getArea() {
+    return this.width * this.height;
+  }
+
+  toString() {
+    return `width = ${this.width}, height = ${this.height}`;
+  }
+}
+
+// 서브클래스
+class ColorRectangle extends Rectangle {
+  constructor(width, height, color) {
+    super(width, height);
+    this.color = color;
+  }
+
+  // 메서드 오버라이딩
+  toString() {
+    return super.toString() + `, color = ${this.color}`;
+  }
+}
+
+const colorRectangle = new ColorRectangle(2, 4, 'red');
+console.log(colorRectangle); // ColorRectangle {width: 2, height: 4, color: "red"}
+
+// 상속을 통해 getArea 메서드를 호출
+console.log(colorRectangle.getArea()); // 8
+// 오버라이딩된 toString 메서드를 호출
+console.log(colorRectangle.toString()); // width = 2, height = 4, color = red
+```
+
+![image](https://user-images.githubusercontent.com/22947274/146668079-e77a78dd-2532-4b55-8f53-c3b25e37f78c.png)
+
+<br>
+
+**1.서브클래스의** `super`**호출**  
+자바스크립트 엔진은 클래스를 평가할 때 수퍼클래스와 서브클래스를 구분하기 위해 "base" 또는 "derive"를 값으로 하는 내부 슬롯`[[ConstructorKind]]`를 갖는다.  
+
+**서브클래스**는 **자신이 직접 인스턴스를 생성하지 않고**, **수퍼클래스**에게 **인스턴스 생성을 위임**한다.  
+
+서브클래스가 `new`연산자와 함께 호출되면 서브클래스 `constructor`내부의 `super`키워드가 함수처럼 호출된다.(수퍼클래스가 평가되어 생성된 함수 객체의 코드가 실행되기 시작한다.)  
+
+만약 서브클래스 `constructor` 내부에 `super`호출이 없으면 에러가 발생한다. 실제 인스턴스를 생성하는 주체는 수퍼클래스이므로 수퍼클래스의 `constructor`를 호출하는 `super`가 호출되지 않으면 인스턴스를 생성할 수 없기 때문이다.  
+
+<br>
+
+**2.수퍼클래스의 인스턴스 생성과** `this`**바인딩**  
+수퍼클래스의 `constructor`내부의 코드가 실행되기 이전에 암묵적으로 빈 객체를 생성한다.  
+생성된 빈 객체는 `this`에 바인딩된다.  
+
+```javascript
+// 수퍼클래스
+class Rectangle {
+  constructor(width, height) {
+    // 암묵적으로 빈 객체, 즉 인스턴스가 생성되고 this에 바인딩된다.
+    console.log(this); // ColorRectangle {}
+    // new 연산자와 함께 호출된 함수, 즉 new.target은 ColorRectangle이다.
+    console.log(new.target); // ColorRectangle
+...
+```
+
+이때 인스턴스는 수퍼클래스가 생성한 것이다.  
+하지만 `new`연산자와 함께 호출된 함수를 가리키는 `new.target`은 서브클래스를 가리킨다.  
+따라서 **인스턴스**는 `new.target`이 가리키는 **서브클래스가 생성한 것으로 처리**된다.  
+
+```javascript
+// 수퍼클래스
+class Rectangle {
+  constructor(width, height) {
+    // 암묵적으로 빈 객체, 즉 인스턴스가 생성되고 this에 바인딩된다.
+    console.log(this); // ColorRectangle {}
+    
+    // new 연산자와 함께 호출된 함수, 즉 new.target은 ColorRectangle이다.
+    console.log(new.target); // ColorRectangle
+
+    // 생성된 인스턴스의 프로토타입으로 ColorRectangle.prototype이 설정된다.
+    console.log(Object.getPrototypeOf(this) === ColorRectangle.prototype); // true
+    console.log(this instanceof ColorRectangle); // true
+    console.log(this instanceof Rectangle); // true
+...
+```
+생성된 인스턴스는 **서브클래스**의 `prototype` **프로퍼티가 가리키는 객체**(`ColorRectangle.prototype`)이다.
+
+<br>
+
+**3.수퍼클래스의 인스턴스 초기화**  
+수퍼클래스의 `constructor`가 실행되어 `this`에 바인딩되어 있는 인스턴스를 초기화한다.
+
+```javascript
+// 수퍼클래스
+class Rectangle {
+  constructor(width, height) {
+    // 암묵적으로 빈 객체, 즉 인스턴스가 생성되고 this에 바인딩된다.
+    console.log(this); // ColorRectangle {}
+    // new 연산자와 함께 호출된 함수, 즉 new.target은 ColorRectangle이다.
+    console.log(new.target); // ColorRectangle
+
+    // 생성된 인스턴스의 프로토타입으로 ColorRectangle.prototype이 설정된다.
+    console.log(Object.getPrototypeOf(this) === ColorRectangle.prototype); // true
+    console.log(this instanceof ColorRectangle); // true
+    console.log(this instanceof Rectangle); // true
+
+    // 인스턴스 초기화
+    this.width = width;
+    this.height = height;
+
+    console.log(this); // ColorRectangle {width: 2, height: 4}
+  }
+...
+```
+
+<br>
+
+**4.서브클래스** `constructor`**로의 복귀와** `this`**바인딩**  
+`super`의 호출이 종료되고 제어 흐름이 서브클래스 `construcotr`로 돌아온다.  
+이때 `super`**가 반환한 인스턴스가** `this`**바인딩된다.**  
+
+서브클래스는 별도의 인스턴스를 생성하지 않고 `super`가 반환한 인스턴스를 그대로 사용한다.  
+
+```javascript
+// 서브클래스
+class ColorRectangle extends Rectangle {
+  constructor(width, height, color) {
+    super(width, height);
+
+    // super가 반환한 인스턴스가 this에 바인딩된다.
+    console.log(this); // ColorRectangle {width: 2, height: 4}
+...
+```
+
+<br>
+
+**5.서브클래스의 인스턴스 초기화**  
+`super`호출 이후 서브클래스의 `constructor`에 기술되어 있는 인스턴스 초기화가 실행된다.  
+
+<br>
+
+**6.인스턴스 반환**  
+클래스의 모든 처리가 끝나면 완성된 인스턴스가 바인딩된 `this`가 암묵적으로 반환된다.
+```javascript
+// 서브클래스
+class ColorRectangle extends Rectangle {
+  constructor(width, height, color) {
+    super(width, height);
+
+    // super가 반환한 인스턴스가 this에 바인딩된다.
+    console.log(this); // ColorRectangle {width: 2, height: 4}
+
+    // 인스턴스 초기화
+    this.color = color;
+
+    // 완성된 인스턴스가 바인딩된 this가 암묵적으로 반환된다.
+    console.log(this); // ColorRectangle {width: 2, height: 4, color: "red"}
+  }
+...
+```
 
 ### 8.7 표준 빌트인 생성자 함수 확장
- 
+`extends` 키워드 다음에는 클래스뿐만이 아니라 `[[Construct]]내부 메서드를 갖는 함수 객체로 평가될수 있는 모든 표현식을 사용할 수 있다.  
+
+`String`, `Number`, `Array`같은 표준 빌트인 객체도 `[[Construct]]`내부 메서드를 갖는 생성자 함수이므로 `extends`키워드를 사용하여 확장할 수 있다.
+```javascript
+// Array 생성자 함수를 상속받아 확장한 MyArray
+class MyArray extends Array {
+  // 중복된 배열 요소를 제거하고 반환한다: [1, 1, 2, 3] => [1, 2, 3]
+  uniq() {
+    return this.filter((v, i, self) => self.indexOf(v) === i);
+  }
+
+  // 모든 배열 요소의 평균을 구한다: [1, 2, 3] => 2
+  average() {
+    return this.reduce((pre, cur) => pre + cur, 0) / this.length;
+  }
+}
+
+const myArray = new MyArray(1, 1, 2, 3);
+console.log(myArray); // MyArray(4) [1, 1, 2, 3]
+
+// MyArray.prototype.uniq 호출
+console.log(myArray.uniq()); // MyArray(3) [1, 2, 3]
+// MyArray.prototype.average 호출
+console.log(myArray.average()); // 1.75
+```
+
+`Array`생성자 함수를 상속받아 확장한 `MyArray`클래스가 생성한 인스턴스는 `Array.prototype`과 `MyArray.prototype`의 모든 메서드를 사용할 수 있다.  
+
+이때 주의할 것은 `Array.prototype`의 메서드 중에서 `map`, `filter`와 같이 새로운 배열을 반환하는 메서드가 `MyArray`클래스의 인스턴스를 반환한다는 것이다.  
+
+```javascript
+console.log(myArray.filter(v => v % 2) instanceof MyArray); // true
+```
+
+만약 `MyArray`클래스의 인스턴스를 반환하지 않으면 메서드 체이닝이 불가능하다.(`uniq`, `average`와 같이 `MyArray`에 선언한 메서드들을 사용할 수 없다.)
+```javascript
+// 메서드 체이닝
+// [1, 1, 2, 3] => [ 1, 1, 3 ] => [ 1, 3 ] => 2
+console.log(myArray.filter(v => v % 2).uniq().average()); // 2
+```
+
+<br>
+
+만약 `MyArray`클래스의 메서드가 `MyArray`클래스가 생성한 인스턴스가 아닌 `Array`가 생성한 인스턴스를 반환하게 하려면 `Symbol.species`를 사용하여 정적 접근자 프로퍼티를 추가한다. 
+```javascript
+// Array 생성자 함수를 상속받아 확장한 MyArray
+class MyArray extends Array {
+  // 모든 메서드가 Array 타입의 인스턴스를 반환하도록 한다.
+  static get [Symbol.species]() { return Array; }
+
+  // 중복된 배열 요소를 제거하고 반환한다: [1, 1, 2, 3] => [1, 2, 3]
+  uniq() {
+    return this.filter((v, i, self) => self.indexOf(v) === i);
+  }
+
+  // 모든 배열 요소의 평균을 구한다: [1, 2, 3] => 2
+  average() {
+    return this.reduce((pre, cur) => pre + cur, 0) / this.length;
+  }
+}
+
+const myArray = new MyArray(1, 1, 2, 3);
+
+console.log(myArray.uniq() instanceof MyArray); // false
+console.log(myArray.uniq() instanceof Array); // true
+
+// 메서드 체이닝
+// uniq 메서드는 Array 인스턴스를 반환하므로 average 메서드를 호출할 수 없다.
+console.log(myArray.uniq().average());
+// TypeError: myArray.uniq(...).average is not a function
+```
+
