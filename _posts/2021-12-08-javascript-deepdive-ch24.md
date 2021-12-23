@@ -194,9 +194,41 @@ innerFunc(); // ④ 10
 </body>
 </html>
 ```
-상위 스코프의 식별자인 `x`를 참조하기 때문에 클로저로 본다.  
+상위 스코프의 식별자인 `x`를 참조하기 때문에 클로저로 볼수 있지만, 외부 함수 `foo`보다 중첩 함수 `bar`의 생명주기가 짧기 때문에 클로저의 본질에 부합하지 않는다.  
+따라서 클로저라고 하지 않는다.  
 
 ![image](https://user-images.githubusercontent.com/80154058/145716267-8be51f68-3cea-453e-9c07-ead18b35dda0.png)
+
+```html
+<!DOCTYPE html>
+<html>
+<body>
+  <script>
+    function foo() {
+      const x = 1;
+      const y = 2;
+
+      // 클로저
+      // 중첩 함수 bar는 외부 함수보다 더 오래 유지되며 상위 스코프의 식별자를 참조한다.
+      function bar() {
+        debugger;
+        console.log(x);
+      }
+      return bar;
+    }
+
+    const bar = foo();
+    bar();
+  </script>
+</body>
+</html>
+```
+위와 같은 예제의 경우를 클로저라고 볼 수 있다.  
+중첩 함수 `bar`는 상위 스코프의 식별자를 참조하고 있고, 외부 함수보다 오래 살아 남기 때문이다.  
+
+즉, 클로저는 중첩 함수가 상위 스코프의 식별자를 참조하고 있고, 중첩 함수가 외부 함수 보다 더 오래 유지되는 경우에 한정하는 것이 일반적이다.
+
+![image](https://user-images.githubusercontent.com/22947274/147241362-34099040-8d34-4274-ab3f-e3e1c8df0715.png)
 
 클로저에 의해 참조되는 상위 스코프의 변수 (`foo`함수의 `x`변수)를 **자유 변수**(`free variable`)라고 부른다.  
 
