@@ -239,7 +239,7 @@ innerFunc(); // ④ 10
 
 상태를 안전하게 은닉(`information hiding`)하고 특정 함수에게만 상태 변경을 허용하기 위해 사용된다.  
 
-1.전역 변수로 관리  
+**1.전역 변수로 관리**  
 ```javascript
 // 카운트 상태 변수
 let num = 0;
@@ -254,8 +254,9 @@ console.log(increase()); // 1
 console.log(increase()); // 2
 console.log(increase()); // 3
 ```
+위 코드는 오류의 가능성이 있어 좋지 않은 코드다. `num` 전역 변수에 언제든지 누구나 접근하여 변경이 가능하기 때문이다.  
 
-2.함수의 지역 변수로 관리  
+**2.함수의 지역 변수로 관리**  
 ```javascript
 // 카운트 상태 변경 함수
 const increase = function () {
@@ -271,8 +272,9 @@ console.log(increase()); // 1
 console.log(increase()); // 1
 console.log(increase()); // 1
 ```
+지역 변수로 활용하여 첫 번째 예제보다는 좋아 보이지만 함수가 호출될 때마다 지역 변수`num`은 다시 선언되어 `0`으로 초기화되기 때문에 상태를 유지하지 못한다.  
 
-3.클로저 활용  
+**3.클로저 활용**  
 ```javascript
 // 카운트 상태 변경 함수
 const increase = (function () {
@@ -290,10 +292,11 @@ console.log(increase()); // 1
 console.log(increase()); // 2
 console.log(increase()); // 3
 ```
+위 코드는 클로저다.  
 
 클로저로 `num`의 상태`state`를 은닉하여 의도치 않게 변경되지 않도록 안전하게 관리하고 특정 함수에게만 상태 변경을 허용하여 상태를 안전하게 변경하고 유지한다.  
 
-4.감소 기능 추가  
+**4.감소 기능 추가(클로저)**  
 ```javascript
 const counter = (function () {
   // 카운트 상태 변수
@@ -320,7 +323,8 @@ console.log(counter.decrease()); // 1
 console.log(counter.decrease()); // 0
 ```
 
-5.생성자 함수로 표현  
+
+**5.생성자 함수로 표현(클로저)**  
 `increase`, `decrease` 메서드는 프로토타입 메서드이다.  
 이 메서드들이 평가되어 함수 객체가 생성될 때 실행 중인 실행 컨텍스트는 **즉시 실행 함수의 실행 컨텍스트**이다.  따라서 `increase`, `decrease`메서드는 즉시 실행 함수의 실행 컨텍스트의 렉시컬 환경을 기억하는 클로저 이다.  
 
@@ -355,21 +359,21 @@ console.log(counter.decrease()); // 1
 console.log(counter.decrease()); // 0
 ```
 
-6.고차 함수 활용한 클로저  
+**6.고차 함수 활용한 클로저(클로저)**  
 > ※ 고차 함수란  
 > 보조 함수를 인자로 전달받고 함수를 반환하는 함수
 
 ```javascript
 // 함수를 인수로 전달받고 함수를 반환하는 고차 함수
 // 이 함수는 카운트 상태를 유지하기 위한 자유 변수 counter를 기억하는 클로저를 반환한다.
-function makeCounter(aux) {
+function makeCounter(predicate) {
   // 카운트 상태를 유지하기 위한 자유 변수
   let counter = 0;
 
   // 클로저를 반환
   return function () {
     // 인수로 전달 받은 보조 함수에 상태 변경을 위임한다.
-    counter = aux(counter);
+    counter = predicate(counter);
     return counter;
   };
 }
